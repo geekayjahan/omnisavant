@@ -15,10 +15,10 @@ export default function Dashboard() {
 
   const views = [
     { id: 'overview', label: 'Intelligence Overview', icon: Brain },
+    { id: 'moat-analysis', label: 'Moat Analysis', icon: FileText },
     { id: 'moats', label: 'Moat Patterns', icon: Shield },
     { id: 'strategies', label: 'Strategic Playbooks', icon: Target },
     { id: 'companies', label: 'Company Analysis', icon: TrendingUp },
-    { id: 'moat-analysis', label: 'Moat Analysis', icon: FileText },
   ];
 
   return (
