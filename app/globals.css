@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-gray-200;
+  }
+
+  body {
+    @apply bg-gray-50 text-gray-900;
+  }
+}
+
+@layer utilities {
+  .glass-card {
+    @apply bg-white border border-gray-200 rounded-xl shadow-sm;
+  }
+
+  .glow-electric {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.15);
+  }
+
+  .glow-pink {
+    box-shadow: 0 0 20px rgba(236, 72, 153, 0.15);
+  }
+
+  .glow-purple {
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.15);
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-electric via-neon-pink to-neon-purple bg-clip-text text-transparent;
+  }
+}
