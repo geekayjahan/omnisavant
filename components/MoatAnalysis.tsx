@@ -6,8 +6,6 @@ import { FileText } from 'lucide-react';
 
 const content = `# AI Moat Analysis: Where the Future Is, and Whether We're Building the Right Things
 
-> A fresh-eyes assessment of where durable AI companies are being built — stripping away hype, cutting to structure.
-
 ---
 
 ## Page 1: The Real Map of Where Value Is Accumulating
