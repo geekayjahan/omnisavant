@@ -10,9 +10,9 @@ const moats = [
     color: 'electric',
     colorClass: 'bg-electric/10 border-electric/30 text-electric',
     badgeClass: 'bg-electric text-white',
-    fullPower: 'Every fintech that has been running for more than 3 years has a ghost problem: the institutional knowledge that left with the last two VP CS departures. The signals that were caught in 2022 that prevented a major enterprise churn. The pattern that one senior analyst noticed but never formalized. The reason a specific lending decision got escalated that is now tribal knowledge in one person\'s head.\n\nOmnisavant at full moat captures and formalizes all of this — not as documents, but as structured decision memory. What signal came in. What threshold triggered it. What action was taken. What outcome followed.',
-    fintech: 'A B2B payments fintech using Omnisavant knows that when an enterprise client\'s transaction volume drops >15% over two consecutive weekly cycles while support ticket volume stays flat, that is historically an early indicator of internal procurement review — not a usage dip. That pattern was learned from six prior cases. It is now in Omnisavant\'s memory for this client.\n\nNo new hire, no competitor, no bolt-on AI feature can replicate that accumulated organizational intelligence. It took 18 months of real decisions to build it. Switching to a competitor means starting from zero.',
-    burry: 'Everyone in fintech is building faster data pipelines. Nobody is capturing the decision logic that sits on top of those pipelines. The data gets cheaper. The institutional interpretation of what data means for this specific org — that is the scarce asset.',
+    fullPower: 'Captures structured decision memory — not documents. What signal came in, what threshold triggered it, what action was taken, what outcome followed. After 18 months, Omnisavant knows this org\'s signal-to-action patterns better than any replacement could reconstruct.',
+    fintech: 'A B2B payments fintech knows that when an enterprise client\'s transaction volume drops >15% over two consecutive weeks while support tickets stay flat, that\'s a procurement review signal — not a usage dip. That pattern came from six prior cases. It\'s now in Omnisavant\'s memory. Switching to a competitor means starting from zero.',
+    burry: 'Everyone is building faster data pipelines. Nobody is capturing the decision logic on top. The data gets cheaper. The institutional interpretation of what it means for this specific org — that is the scarce asset.',
   },
   {
     number: '2',
@@ -21,9 +21,9 @@ const moats = [
     color: 'neon-pink',
     colorClass: 'bg-neon-pink/10 border-neon-pink/30 text-neon-pink',
     badgeClass: 'bg-neon-pink text-white',
-    fullPower: 'Every insight Omnisavant surfaces has a one-click feedback layer. A CS lead sees a churn risk flagged, acts on it, saves the account. They mark: "acted on this — account retained." Six months later, Omnisavant has labeled training data from 2,000 such moments across the org.\n\nThe model now knows what this fintech considers a high-priority signal vs. noise. It knows that the product team at this org typically acts on NPS dips faster than ticket volume spikes. It knows that the enterprise team here has a pattern of ignoring signals on accounts below $30K ARR.\n\nThose are revealed preferences. They cannot be inferred from generic training data.',
-    fintech: 'An SMB lending platform using Omnisavant has trained the Savant Engine on 18 months of portfolio behavior. The model now knows: when a borrower in the construction vertical shows a 22% cash flow spike in April, it is not an improvement signal — it is seasonal pattern noise that historically precedes a May drawdown. Acting on that April spike leads to overlending. Ignoring it avoids the loss.\n\nNo AI model trained on generic data knows this. Only the one trained on this lender\'s own labeled decisions does.',
-    burry: 'The fintech market is full of AI tools trained on industry-average data. But industry averages mask the patterns that matter for a specific portfolio, a specific customer segment, a specific risk profile. The model that trains on your decisions is worth more than the model trained on everyone\'s data.',
+    fullPower: 'One-click feedback on every insight: "acted on this," "already knew this," "wrong context." 10 seconds of friction per insight. 2,000 labeled moments later, the model knows what this org considers signal vs. noise — revealed preferences that cannot be inferred from generic training data.',
+    fintech: 'An SMB lender trained the Savant Engine on 18 months of portfolio behavior. It now knows: a 22% cash flow spike in construction lending in April is seasonal noise that precedes a May drawdown — not an improvement signal. Acting on it leads to overlending. No generic AI model knows this. Only the one trained on this lender\'s own decisions does.',
+    burry: 'Industry-average data masks the patterns that matter for a specific portfolio. The model trained on your decisions is worth more than the one trained on everyone\'s data.',
   },
   {
     number: '3',
@@ -32,7 +32,7 @@ const moats = [
     color: 'neon-purple',
     colorClass: 'bg-neon-purple/10 border-neon-purple/30 text-neon-purple',
     badgeClass: 'bg-neon-purple text-white',
-    fullPower: 'In a fintech at scale, CS doesn\'t talk to Risk. Risk doesn\'t talk to Sales. Sales doesn\'t talk to Compliance. Each team is solving for its own metrics and missing the signals that live in the gaps between teams.\n\nOmnisavant at full moat breaks those walls — not by creating a new all-hands Slack channel, but by routing signals from one team\'s data to the team that needs it, automatically, with context.',
+    fullPower: 'CS doesn\'t talk to Risk. Risk doesn\'t talk to Sales. Each team misses the signals that live in the gaps. Omnisavant routes signals from one team\'s data to the team that needs it — automatically, with context. Every new team connected compounds the value for every existing team.',
     fintech: null,
     fintechSignals: [
       { team: 'Risk', signal: 'Borrower\'s utilization rate creeping toward covenant threshold' },
@@ -40,7 +40,7 @@ const moats = [
       { team: 'Sales', signal: 'Renewal call with this borrower\'s CFO in 10 days' },
       { team: 'Compliance', signal: 'Anomalous transaction pattern flagged on this borrower\'s account 6 weeks ago' },
     ],
-    fintechOutcome: 'In a normal fintech, these four signals live in four different systems, visible to four different teams, with no synthesis layer connecting them. The CFO renewal call happens without context. The CS escalation is handled as a support ticket. The covenant breach is caught too late.\n\nOmnisavant sees all four signals. It surfaces them as a unified account brief to the renewal owner before the 10-day call. The outcome: the renewal conversation is informed, the covenant risk is addressed proactively, and the CFO is impressed rather than surprised.',
+    fintechOutcome: 'Normally, these four signals live in four systems with no connection. The CFO call happens without context. The covenant breach is caught too late.\n\nOmnisavant surfaces all four as a unified brief before the 10-day call. The CFO is impressed rather than surprised.',
     burry: 'The biggest risk in fintech is not the risk you can see. It is the signal sitting in someone else\'s team\'s system that you never saw because no one connected the dots. Omnisavant is the dot-connector. Every team that joins compounds the value for every existing team.',
   },
   {
@@ -50,9 +50,9 @@ const moats = [
     color: 'cyber-teal',
     colorClass: 'bg-cyber-teal/10 border-cyber-teal/30 text-cyber-teal',
     badgeClass: 'bg-cyber-teal text-white',
-    fullPower: 'Omnisavant is not a tab. It is the starting point for every revenue-critical decision in the org. The CS lead\'s Monday morning begins with Omnisavant\'s weekly brief. The RevOps lead\'s pipeline review uses Omnisavant\'s signal layer to filter which accounts deserve attention this week. The Risk team\'s daily runbook is informed by Omnisavant\'s overnight analysis.\n\nYou do not visit Omnisavant. It surfaces into wherever you already work — Salesforce opportunity view, Linear board, Notion weekly meeting doc.',
-    fintech: 'A compliance team at a regulated B2B payments fintech uses Omnisavant embedded into their case management workflow. When a transaction is flagged for AML review, Omnisavant surfaces: the account\'s full signal history, prior SAR activity, peer comparison patterns, and a recommended disposition with full reasoning chain and source citations — all before the analyst has opened the case file.\n\nThe analyst\'s job is now judgment, not assembly. The time-to-decision drops from 4 hours to 45 minutes. The audit trail is automatically generated. The regulator\'s question — "how did you reach this decision?" — is answered before it is asked.\n\nRemoving Omnisavant from this workflow does not mean switching to a competitor. It means rebuilding the entire case management process from scratch.',
-    burry: 'The fintech industry talks about AI automation. What they should be talking about is AI embedding. Automation replaces humans. Embedding makes humans 5x more effective and structurally dependent on the tool. Dependence is the moat. Replacement is a feature.',
+    fullPower: 'Omnisavant is not a tab. It surfaces into wherever teams already work — Salesforce opportunity view, Linear board, Notion weekly doc. You do not visit it. It finds you.',
+    fintech: 'A compliance team embeds Omnisavant into AML case management. When a transaction is flagged, Omnisavant surfaces signal history, prior SAR activity, peer patterns, and a recommended disposition with full reasoning chain — before the analyst opens the case.\n\nTime-to-decision: 4 hours → 45 minutes. The regulator\'s question is answered before it is asked. Removing Omnisavant means rebuilding the entire case process from scratch.',
+    burry: 'Automation replaces humans. Embedding makes humans 5x more effective and structurally dependent. Dependence is the moat. Replacement is a feature.',
   },
   {
     number: '5',
@@ -61,7 +61,7 @@ const moats = [
     color: 'electric',
     colorClass: 'bg-electric/10 border-electric/30 text-electric',
     badgeClass: 'bg-electric text-white',
-    fullPower: 'Omnisavant at full vertical depth understands that "churn signal" in B2B SaaS means something different than "delinquency signal" in SMB lending, which means something different than "counterparty risk signal" in institutional payments.\n\nGeneric AI tools know none of this. They produce generic analysis that applies to every customer equally, which means it applies to none of them precisely.\n\nOmnisavant\'s Savant Engine has been trained, corrected, and labeled specifically for the fintech verticals it operates in. The interpretation quality is demonstrably better for a B2B payments compliance team than any general-purpose AI tool — because it has seen 10,000 labeled decisions from B2B payments compliance teams, not 100,000 generic enterprise decisions.',
+    fullPower: '"Churn signal" in B2B SaaS, "delinquency signal" in SMB lending, "counterparty risk" in institutional payments — these are entirely different things. Generic AI produces one answer for all three. Omnisavant is trained on 10,000 labeled decisions from each vertical. The interpretation quality is demonstrably different.',
     fintech: null,
     verticalTable: [
       { vertical: 'Construction lending', signal: 'Cash conversion cycle extends 18 days', generic: '"Cash conversion cycle extended, investigate."', omnisavant: '"Consistent with normal Q4 construction draw patterns — flag for monitoring but no immediate action."' },
@@ -77,46 +77,46 @@ const moats = [
     color: 'neon-pink',
     colorClass: 'bg-neon-pink/10 border-neon-pink/30 text-neon-pink',
     badgeClass: 'bg-neon-pink text-white',
-    fullPower: 'In fintech, compliance is not a feature. It is a procurement gate, a regulatory survival mechanism, and — for Omnisavant — a compounding moat.\n\nOmnisavant\'s compliance architecture is built into the foundation, not bolted on.',
+    fullPower: 'Compliance is a procurement gate and a compounding moat. Built into the foundation, not bolted on. Every signal surfaced carries:',
     complianceItems: [
       'Full source provenance (what data, from where, accessed when)',
       'Full decision reasoning (what logic, what thresholds, what policies applied)',
       'Full action trail (what was recommended, what was acted on, what outcome followed)',
       'Jurisdiction-aware configurations (SOC 2, GDPR, EU AI Act Article 19, FINRA, SEC)',
     ],
-    fintech: 'The Burry analysis identified the core structural problem: AML fines up 417% in H1 2025. The cause — AI deployed for growth without compliance infrastructure scaled to match. The compliance gap is not a technology problem. It is an architectural problem. Systems were built to acquire customers, not to audit decisions.\n\nOmnisavant enters this gap not as a compliance tool, but as an intelligence layer with compliance baked in. The CCO of a regulated B2B fintech does not approve Omnisavant because it has an AI feature. They approve it because when the regulator asks "show us every decision this AI influenced and the reasoning chain behind it," Omnisavant can produce that audit trail in full — for every account, every signal, every action, going back 18 months.\n\nThat capability shifts the buyer from VP Product to General Counsel. The CCO\'s budget is not discretionary. The switching cost is not UX preference — it is regulatory continuity risk. No chief compliance officer will remove a system that holds 18 months of compliant audit history and rebuild it with a competitor. The cost of that transition is indistinguishable from a compliance risk event.',
-    burry: 'Everyone deployed AI to pass the demo. Nobody deployed AI to pass the audit. Omnisavant is built to pass the audit. When the regulatory correction hits — and Burry\'s analysis makes clear it will — Omnisavant is the only intelligence layer that survives the scrutiny. Competitors who bolted compliance on will fail the regulator\'s question. Omnisavant\'s compliance architecture is the answer before the question is asked.',
+    fintech: 'AML fines up 417% in H1 2025. The cause: AI deployed for growth without compliance infrastructure to match. The CCO doesn\'t approve Omnisavant for its AI feature. They approve it because when the regulator asks "show us every decision this AI influenced," Omnisavant produces the full audit trail — every account, every signal, every action, 18 months back.\n\nThat shifts the buyer from VP Product to General Counsel. No CCO will remove a system holding 18 months of compliant audit history. That transition is indistinguishable from a compliance risk event.',
+    burry: 'Everyone deployed AI to pass the demo. Nobody deployed AI to pass the audit. Omnisavant is built to pass the audit.',
   },
 ];
 
 const burryMisalignments = [
   {
     number: '1',
-    consensus: 'Everyone\'s Building Dashboards. The Data Is Already There.',
-    consensusDetail: 'The consensus move in fintech AI is: aggregate more data, display it better. Every competitor is building a better dashboard.',
-    dataShows: 'The bottleneck is not data access. It is signal interpretation. Fintech operators are drowning in data and starving for the three things that actually require their attention today. The answer is not more data. The answer is better filtering, better context, and better memory of what filtered correctly before.',
+    consensus: 'Everyone\'s building dashboards',
+    consensusDetail: 'Aggregate more data, display it better.',
+    dataShows: 'The bottleneck is not data access. It is signal interpretation. Operators are drowning in data and starving for three things that require their attention today.',
     position: 'Show less, not more. Surface the three signals that matter, not the thirty that exist. Every noise reduction increases signal authority. Authority is the moat.',
   },
   {
     number: '2',
-    consensus: 'Everyone\'s Automating. The Value Is in Accountability.',
-    consensusDetail: 'The consensus move: automate the decision so humans don\'t have to make it.',
-    dataShows: 'In regulated fintech, automation without accountability is a liability time bomb. The CFPB, EU AI Act, and every regulator in the fintech space is converging on one requirement: humans must be accountable for decisions, and that accountability must be auditable.',
-    position: 'Do not automate decisions. Inform them — with full reasoning, full source trail, and a human-in-the-loop confirmation step that generates the audit record automatically. The human decision is the product. Omnisavant is the intelligence that makes the human decision better, faster, and defensible.',
+    consensus: 'Everyone\'s automating',
+    consensusDetail: 'Automate the decision so humans don\'t have to make it.',
+    dataShows: 'In regulated fintech, automation without accountability is a liability time bomb. Every regulator is converging on one requirement: humans must be accountable, and that accountability must be auditable.',
+    position: 'Do not automate decisions. Inform them — with full reasoning, full source trail, and a human-in-the-loop step that generates the audit record automatically. The human decision is the product.',
   },
   {
     number: '3',
-    consensus: 'Everyone\'s Selling AI Features. The Buyer Needs Outcome Insurance.',
-    consensusDetail: '"Our AI surfaces insights." Every vendor says this. The buyer has heard it 40 times this quarter.',
-    dataShows: 'Enterprise buyers in fintech are not buying AI features. They are buying protection against the thing they missed last time — the churn they did not see coming, the compliance failure that cost them the audit, the renewal that slipped because nobody connected the signals.',
-    position: 'Sell not insight but accountability. "Last quarter, Omnisavant flagged 12 accounts before your CS team knew they were at risk. Here are the 4 you acted on and retained. The 8 you didn\'t are churned. Would you like the list of the 9 that are at risk right now?" That is not a feature pitch. That is an outcome guarantee. Outcome guarantees become outcome-based pricing at month 18.',
+    consensus: 'Everyone\'s selling AI features',
+    consensusDetail: '"Our AI surfaces insights." Every vendor says this. Buyers have heard it 40 times this quarter.',
+    dataShows: 'Enterprise buyers are not buying AI features. They are buying protection against the thing they missed last time — the churn they didn\'t see, the compliance failure, the renewal that slipped.',
+    position: '"Last quarter, Omnisavant flagged 12 accounts before your CS team knew they were at risk. 4 retained. 8 churned. Want the list of the 9 at risk right now?" That is an outcome guarantee. Outcome guarantees become outcome-based pricing at month 18.',
   },
   {
     number: '4',
-    consensus: 'Everyone\'s Targeting the VP of Product. The CCO Is the Real Buyer.',
-    consensusDetail: 'The consensus sales motion: land in product, expand to ops, eventually get to finance.',
-    dataShows: 'In regulated fintech, the CCO and General Counsel have budget, urgency, and a non-discretionary mandate. The VP Product has ideas and a roadmap. The CCO has a regulatory deadline and a fine to avoid.',
-    position: 'Enter through compliance. The CCO conversation is: "We build the audit trail for every AI-influenced decision you make. When the regulator asks, you have the answer ready." Once the CCO approves Omnisavant, no VP Product can remove it. The compliance layer is the anchor. Every other value — RevOps intelligence, CS signal, sales context — is the expansion.',
+    consensus: 'Everyone\'s targeting the VP of Product',
+    consensusDetail: 'Land in product, expand to ops, eventually reach finance.',
+    dataShows: 'The CCO has budget, urgency, and a non-discretionary mandate. The VP Product has a roadmap. The CCO has a regulatory deadline and a fine to avoid.',
+    position: 'Enter through compliance. The CCO conversation: "We build the audit trail for every AI-influenced decision. When the regulator asks, you have the answer ready." Once approved, no VP Product can remove it.',
   },
 ];
 
@@ -188,17 +188,14 @@ export default function MagicWand() {
           The Magic Wand Scenario
         </h2>
         <p className="text-gray-500">
-          Omnisavant in fintech · All six moats fully built · Thinking like Burry
+          No constraints. Day one. If Omnisavant could go after everything — entered fintech, built all six moats, thought like Burry — what would that actually look like?
         </p>
       </div>
 
       {/* Setup */}
       <div className="glass-card p-8">
         <h3 className="text-2xl font-bold mb-4">The Setup</h3>
-        <p className="text-gray-600 italic mb-6">Thought experiment: Omnisavant entered fintech. All six moats are fully built. The Savant Engine thinks like Michael Burry — contrarian, structural, against the consensus grain. What does it look like?</p>
-        <p className="text-gray-700 mb-4">Omnisavant in this scenario is not a dashboard. It is not a reporting tool. It is not a nice-to-have intelligence layer.</p>
-        <p className="text-gray-700 mb-6">It is the <strong>operational nervous system</strong> sitting at the center of every B2B fintech that touches enterprise customers — lending platforms, compliance-driven fintechs, institutional payments infrastructure, revenue operations teams inside financial services firms.</p>
-        <p className="text-gray-700 font-medium mb-4">Every morning, before the first meeting, Omnisavant has already:</p>
+        <p className="text-gray-700 mb-6">Omnisavant is the <strong>operational nervous system</strong> at the center of every B2B fintech — lending platforms, compliance-driven fintechs, institutional payments, revenue operations teams. Not a dashboard. Not a reporting tool. Every morning, before the first meeting, it has already:</p>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
           {[
             'Read every customer signal from the past 24 hours across all connected systems',
