@@ -1,262 +1,206 @@
 'use client';
 
-import { Crosshair, AlertTriangle, CheckCircle, XCircle, Clock, ArrowRight, Target, Shield, Zap, TrendingUp, Lock, Brain } from 'lucide-react';
+import { Crosshair, XCircle, CheckCircle, Clock, ArrowRight, Target, Shield, TrendingUp, Lock, AlertTriangle } from 'lucide-react';
+import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, Legend, ResponsiveContainer } from 'recharts';
 
-const saasInstincts = [
-  'Build integrations to ride existing platforms',
-  'Add to Slack',
-  'Replace TLDv or HubSpot',
-  'Win on features',
+const radarData = [
+  { metric: 'Org Memory', omnisavant: 90, alphaSense: 20, salesforce: 40, openAI: 10 },
+  { metric: 'Vertical Depth', omnisavant: 85, alphaSense: 60, salesforce: 25, openAI: 15 },
+  { metric: 'Compliance Native', omnisavant: 88, alphaSense: 50, salesforce: 35, openAI: 5 },
+  { metric: 'Workflow Embed', omnisavant: 80, alphaSense: 30, salesforce: 55, openAI: 20 },
+  { metric: 'Network Effect', omnisavant: 75, alphaSense: 25, salesforce: 50, openAI: 10 },
+  { metric: 'Outcome Pricing', omnisavant: 70, alphaSense: 10, salesforce: 15, openAI: 5 },
 ];
 
 const sixPatterns = [
-  {
-    pattern: 'Narrow Entry Point',
-    winners: 'One painful problem, one hero user — then expand',
-    omnisavantNow: 'Broad signal aggregation for "enterprise operators"',
-    gap: 'Must narrow. Pick one hero user: RevOps lead or VP Customer Success in a B2B SaaS company. Everything else waits.',
-    status: 'red',
-  },
-  {
-    pattern: 'Proprietary Decision Traces',
-    winners: 'Capture inputs, policies applied, exceptions, reasoning — irreplaceable operational asset',
-    omnisavantNow: 'Not yet capturing structured decision history',
-    gap: 'Build first. Every insight acted on or dismissed is a labeled training point. This is the moat.',
-    status: 'red',
-  },
-  {
-    pattern: 'Compliance as Offense',
-    winners: 'Enter through compliance door — audit trails as product DNA, not checkbox',
-    omnisavantNow: 'Compliance thinking is present but positioned as differentiation claim, not architecture',
-    gap: 'Make it architecture. Audit trail of why a customer was flagged for churn, why a RevOps decision was made, when the signal was available — this is what differentiates from OpenAI wrappers.',
-    status: 'amber',
-  },
-  {
-    pattern: 'Outcome-Based Pricing',
-    winners: 'Charge for measurable outcomes; pricing model tied to value delivered',
-    omnisavantNow: 'Per-seat model — pricing not yet tied to outcomes',
-    gap: 'Design for it now, deploy in 18 months. If entering RevOps: what revenue at risk did Omnisavant surface? Price against that. Bake the measurement in from day one or it cannot be quantified retroactively.',
-    status: 'red',
-  },
-  {
-    pattern: 'Human Calibration Investment',
-    winners: 'Intentional human layer creates professional retraining costs',
-    omnisavantNow: 'Not yet present',
-    gap: 'Decide: Is Omnisavant eventually a co-analyst layer (like Abridge for clinicians) or fully autonomous? The human layer makes it stickier in regulated enterprise contexts.',
-    status: 'red',
-  },
-  {
-    pattern: 'AI Positioning',
-    winners: 'Lead with outcomes and transparency; anti-hype wins enterprise trust',
-    omnisavantNow: 'Risk of leading with AI capability ("Savant Engine")',
-    gap: 'Lead with the outcome, not the engine. "You missed three churn signals last quarter. Here\'s one you\'re about to miss." That sentence sells. The engine is a footnote.',
-    status: 'amber',
-  },
+  { pattern: 'Narrow Entry Point', omnisavantNow: 'Broad signal aggregation', gap: 'Pick one hero user: RevOps lead or VP CS. Everything else waits.', status: 'red' },
+  { pattern: 'Proprietary Decision Traces', omnisavantNow: 'Not yet capturing decision history', gap: 'Every insight acted on or dismissed is a labeled training point. Build this first.', status: 'red' },
+  { pattern: 'Compliance as Offense', omnisavantNow: 'Present as claim, not architecture', gap: 'Audit trail of every flagged signal, every decision, every outcome — baked in from day one.', status: 'amber' },
+  { pattern: 'Outcome-Based Pricing', omnisavantNow: 'Per-seat model, not yet outcome-tied', gap: 'Design the measurement now. Deploy outcome pricing at month 18. No retroactive quantification.', status: 'red' },
+  { pattern: 'Human Calibration Layer', omnisavantNow: 'Not yet present', gap: 'Decide: co-analyst or fully autonomous? Human layer increases stickiness in regulated enterprise.', status: 'red' },
+  { pattern: 'AI Positioning', omnisavantNow: 'Risk of leading with capability', gap: '"You missed three churn signals last quarter. Here\'s one you\'re about to miss." Engine is a footnote.', status: 'amber' },
 ];
 
 const notFits = [
-  {
-    area: 'Slack integration play',
-    why: 'Positions Omnisavant as a notification tool. Notifications get muted. The moat is being the source of intelligence, not a push channel.',
-  },
-  {
-    area: 'Workflow replacement (HubSpot / TLDv)',
-    why: 'Replacement positioning invites procurement comparison. Omnisavant wins when it sits above these tools, not when it competes with them.',
-  },
-  {
-    area: 'Horizontal AI assistant',
-    why: 'No proprietary data, no switching costs, no moat. OpenAI and Google will always win this.',
-  },
-  {
-    area: 'Raw data aggregation',
-    why: 'AlphaSense owns this for financial data. Omnisavant\'s edge is structured interpretation of internal unstructured data — not aggregating more inputs, but making fewer inputs more actionable.',
-  },
-  {
-    area: 'Compliance as tick-box',
-    why: 'Compliance claimed as a feature ("we\'re SOC 2 compliant") is table stakes. Compliance as architecture (audit trail of every signal, every decision, every action taken) is a moat. The first is marketing; the second is a procurement gate no competitor can unlock without rebuilding from scratch.',
-  },
-];
-
-const competitors = [
-  {
-    name: 'OpenAI / Perplexity',
-    orgMemory: '✗ None',
-    verticalInterp: '✗ Generic',
-    networkEffect: '✗ None',
-    compliance: '✗ None',
-    pricing: '✗ No',
-    positioning: 'Capability-led',
-    color: 'text-red-600',
-  },
-  {
-    name: 'AlphaSense',
-    orgMemory: '✗ None (market data, not your org)',
-    verticalInterp: '~ Financial analysts only',
-    networkEffect: '✗ None',
-    compliance: '~ Bolted on',
-    pricing: '✗ No',
-    positioning: 'Capability-led',
-    color: 'text-orange-600',
-  },
-  {
-    name: 'Salesforce / HubSpot',
-    orgMemory: '~ CRM records, no intelligence layer',
-    verticalInterp: '✗ Generic',
-    networkEffect: '~ Partial (shared CRM)',
-    compliance: '~ Bolted on',
-    pricing: '✗ No',
-    positioning: 'Feature-led',
-    color: 'text-orange-600',
-  },
-  {
-    name: 'Omnisavant (Target)',
-    orgMemory: '✓ Wedge — build first',
-    verticalInterp: '✓ Over-fit to B2B SaaS operators',
-    networkEffect: '✓ Intra-org network effect',
-    compliance: '✓ Build native — CCO wedge',
-    pricing: '✓ Design measurement from day one',
-    positioning: 'Outcome-led',
-    color: 'text-green-600',
-  },
+  { area: 'Slack integration', why: 'Notifications get muted. The moat is being the source of intelligence, not the push channel.' },
+  { area: 'HubSpot / TLDv replacement', why: 'Replacement positioning invites procurement comparison. Omnisavant wins sitting above these tools.' },
+  { area: 'Horizontal AI assistant', why: 'No proprietary data, no switching costs. OpenAI and Google always win this.' },
+  { area: 'Compliance as tick-box', why: 'SOC 2 compliance is table stakes. Compliance as architecture — audit trail of every signal and decision — is the procurement gate.' },
 ];
 
 const phases = [
   {
-    phase: 'Phase 1',
-    timeframe: '0–6 months',
-    label: 'Land the Nervous System',
-    color: 'bg-electric',
+    phase: 'Phase 1', timeframe: '0–6 months', label: 'Land the Nervous System',
+    color: 'bg-electric', textColor: 'text-electric', borderColor: 'border-electric/30', bgColor: 'bg-electric/5',
     moats: [
-      {
-        number: '1',
-        name: 'Organizational Memory as Non-Transferable Asset',
-        description: 'Every insight acted on, every signal dismissed, every pattern that proved meaningful to this specific org. After 18 months, Omnisavant knows this org\'s signal-to-action patterns better than any replacement could reconstruct.',
-        build: 'Store decisions, not just documents. What signal prompted action? What was ignored and why? What outcome followed?',
-      },
-      {
-        number: '5',
-        name: 'Vertical Depth in 1–2 Verticals First',
-        description: 'Generic LLMs don\'t understand that "escalation rate" means something different in B2B SaaS vs. logistics. Omnisavant\'s interpretation quality in a vertical must be demonstrably better than a general-purpose tool within 6 months of a customer\'s first 5 design partners.',
-        build: 'Over-fit the Savant Engine to B2B SaaS as vertical one. Every labeled correction from those 5 design partners makes the model better for the next 50.',
-      },
+      { number: '1', name: 'Organizational Memory', build: 'Store decisions, not documents. Signal → threshold → action → outcome.' },
+      { number: '5', name: 'Vertical Depth', build: 'Over-fit to B2B SaaS. 5 design partners label corrections that improve the next 50.' },
     ],
   },
   {
-    phase: 'Phase 2',
-    timeframe: '6–18 months',
-    label: 'Become Structurally Embedded',
-    color: 'bg-neon-pink',
+    phase: 'Phase 2', timeframe: '6–18 months', label: 'Become Structurally Embedded',
+    color: 'bg-neon-pink', textColor: 'text-neon-pink', borderColor: 'border-neon-pink/30', bgColor: 'bg-neon-pink/5',
     moats: [
-      {
-        number: '3',
-        name: 'Cross-Team Signal Arbitrage (Intra-Org Network Effect)',
-        description: 'The platform gets more valuable as more teams use it. CS signals become visible to Product. Sales signals become visible to CS. This is an intra-organizational network effect — rare in B2B SaaS because most tools serve one team.',
-        build: 'Every new team connected increases the signal surface for every existing team. A customer with 2 teams on Omnisavant has more reason to add a 3rd than to switch. Churn becomes structurally harder as breadth increases.',
-      },
-      {
-        number: '4',
-        name: 'Workflow Embedding — Push, Not Pull',
-        description: 'A Slack digest that surfaces emerging signals is not the goal. The goal: Omnisavant is the first thing a RevOps lead opens, because it tells them what they\'ll be dealing with today. It lives inside the tools teams act on — Salesforce, Linear, Notion — not as a tab they visit.',
-        build: 'Push signals into systems of action, not dashboards they check.',
-      },
+      { number: '3', name: 'Cross-Team Network Effect', build: 'CS signals visible to Product. Sales signals visible to CS. Each new team compounds value for every existing team.' },
+      { number: '4', name: 'Workflow Embedding', build: 'Push signals into Salesforce, Linear, Notion. Not a tab they visit — infrastructure they depend on.' },
     ],
   },
   {
-    phase: 'Phase 3',
-    timeframe: '18–36 months',
-    label: 'Price for Value and Close the Gate',
-    color: 'bg-neon-purple',
+    phase: 'Phase 3', timeframe: '18–36 months', label: 'Price for Value, Close the Gate',
+    color: 'bg-neon-purple', textColor: 'text-neon-purple', borderColor: 'border-neon-purple/30', bgColor: 'bg-neon-purple/5',
     moats: [
-      {
-        number: '2',
-        name: 'Signal-to-Action Learning Loop',
-        description: 'Every time an insight is surfaced and a team acts or doesn\'t act, that feedback trains the model to understand what matters to this org. A lightweight feedback mechanism on every insight card — "we acted on this," "already knew this," "wrong context" — generates labeled preferences no competitor can replicate.',
-        build: '10 seconds of feedback friction per insight generates years of compounding signal.',
-      },
-      {
-        number: '6',
-        name: 'Compliance-Adjacent Architecture as GTM Wedge',
-        description: 'By month 18, the audit trail Omnisavant has built — why was this account flagged, what signals were available when this churn happened, what was known and when — shifts the buyer from VP Product to General Counsel or CCO in regulated verticals. The CCO\'s budget is not discretionary.',
-        build: 'Design the audit trail from day one. It does not need to be sold in month one. It needs to be there in month 18 when the CCO asks for it.',
-      },
+      { number: '2', name: 'Signal-to-Action Loop', build: '10s of feedback per insight. 2,000 labeled moments = org-specific model no competitor can replicate.' },
+      { number: '6', name: 'Compliance as GTM Wedge', build: 'By month 18 the audit trail shifts buyer from VP Product to General Counsel. CCO budget is non-discretionary.' },
     ],
   },
-];
-
-const positioning = [
-  { competitor: 'AlphaSense', verdict: 'Not this', reason: 'AlphaSense serves financial analysts reading market data. Omnisavant serves CS, RevOps, and Product reading customer signals. The data is internal and unstructured; the buyer is an operator, not an analyst.' },
-  { competitor: 'Claude / ChatGPT / Perplexity', verdict: 'Not this', reason: 'General-purpose reasoning tools with no enterprise memory, no organizational context, no compliance layer, and no accountability for outcomes. Omnisavant knows your org\'s signal-to-action history. They don\'t.' },
-  { competitor: 'Glean', verdict: 'Not this', reason: 'Glean is enterprise search. It surfaces documents. Omnisavant surfaces decisions. The abstraction layer is one level higher.' },
-  { competitor: 'TLDv / Grain', verdict: 'Not this', reason: 'Recording tools. Omnisavant is what happens after the recording: the pattern recognition, the escalation, the memory that the next call should know about this account.' },
-  { competitor: 'HubSpot / Salesforce', verdict: 'Not this', reason: 'Systems of record. Omnisavant is the intelligence layer that sits on top of those systems of record and tells you what they\'re not surfacing.' },
 ];
 
 export default function OmnisavantPositioning() {
   return (
     <div className="space-y-8">
+
       {/* Header */}
       <div className="glass-card p-8">
         <h2 className="text-3xl font-bold mb-2 flex items-center gap-3">
           <Crosshair className="text-neon-pink" size={36} />
           Omnisavant Positioning
         </h2>
-        <p className="text-gray-500">
-          Where we fit · Where we don&apos;t · What to go after — synthesized from all moat analyses
-        </p>
+        <p className="text-gray-500">Where we fit · Where we don&apos;t · What to go after — synthesized across all moat analyses</p>
       </div>
 
-      {/* Strategic Frame */}
-      <div className="glass-card p-8">
-        <h3 className="text-2xl font-bold mb-2 flex items-center gap-2">
-          <AlertTriangle className="text-amber-500" size={24} />
-          The Strategic Frame: What Omnisavant Is Not Building
-        </h3>
-        <p className="text-gray-600 mb-6">The paths that look obvious are the ones that lead to commodity. These are the directions that make Omnisavant an add-on — something that can be killed at contract renewal:</p>
-        <div className="grid grid-cols-2 gap-3 mb-6">
-          {saasInstincts.map((item, i) => (
-            <div key={i} className="flex items-start gap-3 bg-red-50 border border-red-200 rounded-lg p-4">
-              <XCircle className="text-red-500 mt-0.5 shrink-0" size={18} />
-              <span className="text-sm text-red-800">{item}</span>
-            </div>
-          ))}
+      {/* Strategic Frame + Radar side by side */}
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+
+        {/* Strategic Frame */}
+        <div className="glass-card p-8 flex flex-col">
+          <h3 className="text-xl font-bold mb-1 flex items-center gap-2">
+            <AlertTriangle className="text-amber-500" size={20} />
+            The Strategic Frame
+          </h3>
+          <p className="text-gray-500 text-sm mb-5">Paths that look obvious lead to commodity. These make Omnisavant an add-on — killable at contract renewal.</p>
+          <div className="grid grid-cols-2 gap-3 mb-6">
+            {['Build integrations to ride existing platforms', 'Add to Slack', 'Replace TLDv or HubSpot', 'Win on features'].map((item, i) => (
+              <div key={i} className="flex items-center gap-2 bg-red-50 border border-red-200 rounded-lg px-4 py-3">
+                <XCircle className="text-red-400 shrink-0" size={15} />
+                <span className="text-sm text-red-800">{item}</span>
+              </div>
+            ))}
+          </div>
+          <div className="bg-electric/8 border border-electric/25 rounded-xl p-5 mt-auto">
+            <p className="text-xs font-semibold text-electric uppercase mb-2">The right frame</p>
+            <p className="text-gray-900 font-medium text-sm leading-relaxed">Omnisavant is not a tool enterprise buys. It is the nervous system it cannot start its day without. The test: <strong className="text-gray-900">"If Omnisavant went down at 9am Monday, would revenue decisions stall?"</strong> If yes — that is the right place to build.</p>
+          </div>
         </div>
-        <div className="bg-electric/10 border border-electric/30 rounded-xl p-6">
-          <p className="text-sm font-semibold text-electric mb-2">The right frame:</p>
-          <p className="text-gray-800 font-medium">Omnisavant is not a tool that enterprise buys. It is <em>the nervous system the enterprise cannot start its day without.</em> The test is not &ldquo;do users like it?&rdquo; The test is: <strong>&ldquo;If Omnisavant went down at 9am on a Monday, would revenue decisions stall?&rdquo;</strong> If yes, that is the right place to build. Everything before that answer is a demo.</p>
+
+        {/* Radar Chart */}
+        <div className="glass-card p-8">
+          <h3 className="text-xl font-bold mb-1 flex items-center gap-2">
+            <Shield className="text-neon-purple" size={20} />
+            Competitive Positioning Map
+          </h3>
+          <p className="text-gray-500 text-sm mb-4">Omnisavant&apos;s target moat profile vs. the market</p>
+          <ResponsiveContainer width="100%" height={320}>
+            <RadarChart data={radarData}>
+              <PolarGrid stroke="#e5e7eb" />
+              <PolarAngleAxis dataKey="metric" tick={{ fill: '#374151', fontSize: 11 }} />
+              <PolarRadiusAxis angle={90} domain={[0, 100]} tick={{ fill: '#9ca3af', fontSize: 10 }} />
+              <Radar name="Omnisavant (target)" dataKey="omnisavant" stroke="#ec4899" fill="#ec4899" fillOpacity={0.25} strokeWidth={2} />
+              <Radar name="AlphaSense" dataKey="alphaSense" stroke="#f97316" fill="#f97316" fillOpacity={0.1} strokeWidth={1.5} />
+              <Radar name="Salesforce / HubSpot" dataKey="salesforce" stroke="#6b7280" fill="#6b7280" fillOpacity={0.1} strokeWidth={1.5} />
+              <Radar name="OpenAI / Perplexity" dataKey="openAI" stroke="#ef4444" fill="#ef4444" fillOpacity={0.08} strokeWidth={1} />
+              <Legend wrapperStyle={{ fontSize: '11px' }} iconType="circle" />
+            </RadarChart>
+          </ResponsiveContainer>
         </div>
       </div>
 
-      {/* Six Pattern Map */}
-      <div className="glass-card p-8">
-        <h3 className="text-2xl font-bold mb-2 flex items-center gap-2">
-          <Target className="text-electric" size={24} />
-          The Six Pattern Map — Scored Against Omnisavant
-        </h3>
-        <p className="text-gray-600 mb-6">The AI Moat Analysis identified six patterns separating winners from noise. Here is where Omnisavant sits honestly against each one.</p>
-        <div className="overflow-x-auto">
+      {/* Where it fits vs doesn't — compact table pair */}
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+
+        {/* Fits */}
+        <div className="glass-card p-8">
+          <h3 className="text-xl font-bold mb-1 flex items-center gap-2">
+            <CheckCircle className="text-green-500" size={20} />
+            Where Omnisavant Fits
+          </h3>
+          <p className="text-gray-500 text-sm mb-4">Vertical Intelligence OS for revenue and customer teams — owns the signal-to-decision path.</p>
           <table className="w-full text-sm border-collapse">
             <thead>
               <tr className="bg-gray-50">
-                <th className="border border-gray-200 px-4 py-3 text-left font-semibold text-gray-700 w-[18%]">Pattern</th>
-                <th className="border border-gray-200 px-4 py-3 text-left font-semibold text-gray-700 w-[25%]">What Winners Do</th>
-                <th className="border border-gray-200 px-4 py-3 text-left font-semibold text-gray-700 w-[22%]">Omnisavant Now</th>
-                <th className="border border-gray-200 px-4 py-3 text-left font-semibold text-gray-700 w-[30%]">Gap / Mandate</th>
-                <th className="border border-gray-200 px-4 py-3 text-center font-semibold text-gray-700 w-[5%]">Status</th>
+                <th className="border border-gray-200 px-3 py-2 text-left text-gray-600 font-semibold w-[28%]">Player</th>
+                <th className="border border-gray-200 px-3 py-2 text-left text-gray-600 font-semibold w-[30%]">What they do</th>
+                <th className="border border-gray-200 px-3 py-2 text-left text-green-700 font-semibold">Omnisavant&apos;s edge</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                ['AlphaSense', 'Market data, financial analysts', 'Customer signals for operators — different data, different buyer'],
+                ['Claude / ChatGPT', 'General reasoning, no org memory', 'Knows your org\'s signal history; accountable for outcomes'],
+                ['Glean', 'Surfaces documents', 'Surfaces decisions — one abstraction layer higher'],
+                ['TLDv / Grain', 'Records meetings', 'Pattern recognition, escalation, memory after the recording'],
+                ['HubSpot / Salesforce', 'Systems of record', 'Intelligence layer that surfaces what they\'re not showing you'],
+              ].map(([p, w, e], i) => (
+                <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'}>
+                  <td className="border border-gray-200 px-3 py-2 font-semibold text-gray-800">{p}</td>
+                  <td className="border border-gray-200 px-3 py-2 text-gray-500 text-xs">{w}</td>
+                  <td className="border border-gray-200 px-3 py-2 text-green-700 font-medium text-xs">{e}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <div className="mt-4 border border-amber-200 bg-amber-50 rounded-lg px-4 py-3">
+            <p className="text-xs text-amber-900"><strong>Structural advantage:</strong> Incumbents carry feature debt, backward compatibility, legacy architecture. Omnisavant is unburdened. That wiggle room is the competitive window — and it closes in 18–24 months.</p>
+          </div>
+        </div>
+
+        {/* Doesn't fit */}
+        <div className="glass-card p-8">
+          <h3 className="text-xl font-bold mb-1 flex items-center gap-2">
+            <XCircle className="text-red-500" size={20} />
+            Where Omnisavant Does Not Fit
+          </h3>
+          <p className="text-gray-500 text-sm mb-5">Be as clear about what not to chase as what to pursue.</p>
+          <div className="space-y-3">
+            {notFits.map((item, i) => (
+              <div key={i} className="flex gap-4 border border-gray-100 rounded-lg p-4 bg-gray-50">
+                <XCircle className="text-red-300 shrink-0 mt-0.5" size={16} />
+                <div>
+                  <p className="font-semibold text-gray-800 text-sm">{item.area}</p>
+                  <p className="text-gray-600 text-xs mt-1">{item.why}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Six Pattern Scorecard */}
+      <div className="glass-card p-8">
+        <h3 className="text-xl font-bold mb-1 flex items-center gap-2">
+          <Target className="text-electric" size={20} />
+          Six Pattern Scorecard
+        </h3>
+        <p className="text-gray-500 text-sm mb-6">Where Omnisavant sits today vs. what winners do — and the mandate to close each gap.</p>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm border-collapse">
+            <thead>
+              <tr className="bg-gray-900 text-white">
+                <th className="px-4 py-3 text-left font-semibold w-[20%]">Pattern</th>
+                <th className="px-4 py-3 text-left font-semibold w-[25%]">Omnisavant Today</th>
+                <th className="px-4 py-3 text-left font-semibold">Mandate</th>
+                <th className="px-4 py-3 text-center font-semibold w-[80px]">Status</th>
               </tr>
             </thead>
             <tbody>
               {sixPatterns.map((row, i) => (
-                <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'}>
+                <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
                   <td className="border border-gray-200 px-4 py-3 font-semibold text-gray-900">{row.pattern}</td>
-                  <td className="border border-gray-200 px-4 py-3 text-gray-600">{row.winners}</td>
-                  <td className="border border-gray-200 px-4 py-3">
-                    <span className={`text-sm ${row.status === 'red' ? 'text-red-700' : 'text-amber-700'}`}>{row.omnisavantNow}</span>
-                  </td>
-                  <td className="border border-gray-200 px-4 py-3 text-gray-700 font-medium">{row.gap}</td>
+                  <td className="border border-gray-200 px-4 py-3 text-gray-500 text-xs">{row.omnisavantNow}</td>
+                  <td className="border border-gray-200 px-4 py-3 text-gray-800 text-xs font-medium">{row.gap}</td>
                   <td className="border border-gray-200 px-4 py-3 text-center">
-                    {row.status === 'red'
-                      ? <span className="inline-block w-3 h-3 rounded-full bg-red-500"></span>
-                      : <span className="inline-block w-3 h-3 rounded-full bg-amber-400"></span>}
+                    <span className={`inline-flex items-center justify-center w-20 py-1 rounded-full text-xs font-bold ${row.status === 'red' ? 'bg-red-100 text-red-700' : 'bg-amber-100 text-amber-700'}`}>
+                      {row.status === 'red' ? 'Build now' : 'In progress'}
+                    </span>
                   </td>
                 </tr>
               ))}
@@ -265,99 +209,30 @@ export default function OmnisavantPositioning() {
         </div>
       </div>
 
-      {/* Where it fits + where it doesn't — side by side */}
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
-        {/* Where it fits */}
-        <div className="glass-card p-8">
-          <h3 className="text-2xl font-bold mb-2 flex items-center gap-2">
-            <CheckCircle className="text-green-500" size={24} />
-            Where Omnisavant Fits
-          </h3>
-          <div className="bg-electric/10 border border-electric/30 rounded-xl p-4 mb-6">
-            <p className="text-electric font-bold text-sm">The Workflow / Application Layer</p>
-            <p className="text-gray-800 font-medium mt-1">Vertical Intelligence Operating System for Revenue and Customer Teams</p>
-            <p className="text-gray-600 text-sm mt-2">A deeply vertical, workflow-embedded intelligence layer that owns the signal-to-decision path for B2B enterprise operators. Not a foundation model, not infrastructure, not a horizontal assistant.</p>
-          </div>
-          <p className="text-xs font-semibold text-gray-500 uppercase mb-3">How Omnisavant stands apart</p>
-          <div className="overflow-x-auto mb-4">
-            <table className="w-full text-sm border-collapse">
-              <thead>
-                <tr className="bg-gray-50">
-                  <th className="border border-gray-200 px-3 py-2 text-left font-semibold text-gray-600 w-[30%]">Player</th>
-                  <th className="border border-gray-200 px-3 py-2 text-left font-semibold text-gray-600">What they do</th>
-                  <th className="border border-gray-200 px-3 py-2 text-left font-semibold text-gray-600">Omnisavant&apos;s distinction</th>
-                </tr>
-              </thead>
-              <tbody>
-                {[
-                  ['AlphaSense', 'Market data for financial analysts', 'Internal customer signals for operators — different data, different buyer'],
-                  ['Claude / ChatGPT', 'General reasoning, no org memory', 'Knows your org\'s signal history; accountable for outcomes'],
-                  ['Glean', 'Surfaces documents', 'Surfaces decisions — one abstraction layer higher'],
-                  ['TLDv / Grain', 'Records meetings', 'What happens after the recording: pattern recognition, escalation, memory'],
-                  ['HubSpot / Salesforce', 'Systems of record', 'Intelligence layer on top — tells you what they\'re not surfacing'],
-                ].map(([player, what, distinction], i) => (
-                  <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'}>
-                    <td className="border border-gray-200 px-3 py-2 font-semibold text-gray-800">{player}</td>
-                    <td className="border border-gray-200 px-3 py-2 text-gray-600">{what}</td>
-                    <td className="border border-gray-200 px-3 py-2 text-green-700 font-medium">{distinction}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
-            <p className="text-sm text-amber-900"><strong>The structural advantage:</strong> Incumbents cannot become Omnisavant — they carry years of feature debt, backward compatibility obligations, and legacy architecture. Omnisavant is unburdened. That wiggle room is the competitive window, and it closes as incumbents improve.</p>
-          </div>
-        </div>
-
-        {/* Where it doesn't */}
-        <div className="glass-card p-8">
-          <h3 className="text-2xl font-bold mb-2 flex items-center gap-2">
-            <XCircle className="text-red-500" size={24} />
-            Where Omnisavant Does Not Fit
-          </h3>
-          <p className="text-gray-600 mb-6">Be as clear about what not to chase as what to pursue.</p>
-          <div className="space-y-4">
-            {notFits.map((item, i) => (
-              <div key={i} className="border border-red-100 bg-red-50/50 rounded-lg p-4">
-                <p className="font-semibold text-red-800 text-sm mb-1">{item.area}</p>
-                <p className="text-sm text-gray-700">{item.why}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Phase Build Sequence */}
+      {/* Build Sequence */}
       <div className="glass-card p-8">
-        <h3 className="text-2xl font-bold mb-2 flex items-center gap-2">
-          <Clock className="text-cyber-teal" size={24} />
-          The Six Moats — Omnisavant&apos;s Build Sequence
+        <h3 className="text-xl font-bold mb-1 flex items-center gap-2">
+          <Clock className="text-cyber-teal" size={20} />
+          Build Sequence — Six Moats in Three Phases
         </h3>
-        <p className="text-gray-600 mb-2">Drawing from all three analyses, here is the honest sequencing.</p>
-        <p className="text-sm text-gray-500 italic mb-8">The logic: first make individual customers impossible to churn, then make organizations impossible to churn, then make competitors impossible to enter.</p>
-
-        <div className="space-y-8">
+        <p className="text-gray-500 text-sm mb-8">First make individual customers impossible to churn. Then make organizations impossible to churn. Then make competitors impossible to enter.</p>
+        <div className="space-y-6">
           {phases.map((phase, pi) => (
-            <div key={pi}>
-              <div className="flex items-center gap-4 mb-5">
-                <div className={`${phase.color} text-white px-4 py-2 rounded-lg font-bold text-sm`}>{phase.phase}</div>
-                <div className="text-gray-500 font-medium">{phase.timeframe}</div>
-                <ArrowRight size={16} className="text-gray-300" />
-                <div className="font-bold text-gray-900">{phase.label}</div>
+            <div key={pi} className={`border ${phase.borderColor} ${phase.bgColor} rounded-xl p-6`}>
+              <div className="flex items-center gap-3 mb-5">
+                <span className={`${phase.color} text-white px-3 py-1 rounded-lg font-bold text-xs`}>{phase.phase}</span>
+                <span className="text-gray-500 text-sm">{phase.timeframe}</span>
+                <ArrowRight size={14} className="text-gray-300" />
+                <span className={`font-bold text-sm ${phase.textColor}`}>{phase.label}</span>
               </div>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 {phase.moats.map((moat, mi) => (
-                  <div key={mi} className="border border-gray-200 rounded-xl p-5 bg-gray-50">
-                    <div className="flex items-center gap-2 mb-2">
+                  <div key={mi} className="bg-white rounded-xl p-5 border border-gray-200">
+                    <div className="flex items-center gap-2 mb-3">
                       <span className={`w-7 h-7 rounded-full ${phase.color} text-white text-xs font-bold flex items-center justify-center shrink-0`}>{moat.number}</span>
                       <h4 className="font-bold text-gray-900 text-sm">{moat.name}</h4>
                     </div>
-                    <p className="text-sm text-gray-600 mb-3">{moat.description}</p>
-                    <div className="bg-white border border-gray-200 rounded-lg p-3">
-                      <p className="text-xs text-gray-500 uppercase font-semibold mb-1">Build Requirement</p>
-                      <p className="text-sm text-gray-700 italic">{moat.build}</p>
-                    </div>
+                    <p className="text-xs text-gray-600 leading-relaxed">{moat.build}</p>
                   </div>
                 ))}
               </div>
@@ -366,65 +241,63 @@ export default function OmnisavantPositioning() {
         </div>
       </div>
 
-      {/* Outcome-Based Pricing Mandate */}
-      <div className="glass-card p-8">
-        <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
-          <TrendingUp className="text-neon-pink" size={24} />
-          The Outcome-Based Pricing Mandate
-        </h3>
-        <p className="text-gray-600 mb-6">This is not an 18-month decision. It is an architectural decision made today so that the measurement exists in 18 months.</p>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-          <div className="bg-red-50 border border-red-200 rounded-xl p-5">
-            <p className="text-red-700 font-bold text-sm mb-2">The default model (avoid)</p>
-            <p className="text-gray-700 text-sm">Price per seat, grow headcount, negotiate at renewal.</p>
-          </div>
-          <div className="bg-green-50 border border-green-200 rounded-xl p-5">
-            <p className="text-green-700 font-bold text-sm mb-2">The Right Instinct</p>
-            <p className="text-gray-700 text-sm">If Omnisavant is in RevOps, it is surfacing revenue at risk. That number is quantifiable. Design the product so that every insight surfaced has a downstream outcome tracked.</p>
-          </div>
-        </div>
-        <div className="bg-gray-900 rounded-xl p-6 text-white">
-          <p className="text-gray-400 text-xs uppercase font-semibold mb-3">The Renewal Sentence (Month 18)</p>
-          <p className="text-lg font-medium">&ldquo;We surfaced 47 at-risk accounts. You retained 31. At an average contract value of $X, that is $Y in retained revenue.&rdquo;</p>
-          <p className="text-gray-400 text-sm mt-3">That sentence is the renewal conversation.</p>
-        </div>
-        <div className="mt-4 bg-electric/10 border border-electric/30 rounded-lg p-4">
-          <p className="text-sm text-gray-700"><strong>The mandate:</strong> Every vertical Omnisavant enters must have a quantifiable outcome metric designed from the start. Revenue retained. Escalations avoided. Decisions made with signal vs. without. Without this, outcome-based pricing is a wish. With it, it is a moat.</p>
-        </div>
-      </div>
+      {/* Outcome Pricing + Scorecard */}
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
 
-      {/* Honest Scorecard */}
-      <div className="glass-card p-8">
-        <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">
-          <Shield className="text-neon-purple" size={24} />
-          The Honest Scorecard: Omnisavant vs. The Market
-        </h3>
-        <div className="overflow-x-auto">
-          <table className="w-full text-sm border-collapse">
+        {/* Pricing Mandate */}
+        <div className="glass-card p-8">
+          <h3 className="text-xl font-bold mb-1 flex items-center gap-2">
+            <TrendingUp className="text-neon-pink" size={20} />
+            Outcome-Based Pricing Mandate
+          </h3>
+          <p className="text-gray-500 text-sm mb-5">Not an 18-month decision — an architectural decision made today so the measurement exists in 18 months.</p>
+          <div className="grid grid-cols-2 gap-3 mb-5">
+            <div className="bg-red-50 border border-red-200 rounded-xl p-4">
+              <p className="text-xs font-bold text-red-700 uppercase mb-2">Avoid</p>
+              <p className="text-sm text-gray-700">Price per seat, grow headcount, negotiate at renewal.</p>
+            </div>
+            <div className="bg-green-50 border border-green-200 rounded-xl p-4">
+              <p className="text-xs font-bold text-green-700 uppercase mb-2">Build toward</p>
+              <p className="text-sm text-gray-700">Every insight has a downstream outcome tracked. Revenue surfaced = revenue priced against.</p>
+            </div>
+          </div>
+          <div className="bg-gray-900 rounded-xl p-5">
+            <p className="text-gray-400 text-xs uppercase mb-2">The month-18 renewal sentence</p>
+            <p className="text-white font-medium text-sm">"We surfaced 47 at-risk accounts. You retained 31. At avg contract value of $X, that is $Y in retained revenue."</p>
+          </div>
+        </div>
+
+        {/* Market Scorecard */}
+        <div className="glass-card p-8">
+          <h3 className="text-xl font-bold mb-5 flex items-center gap-2">
+            <Shield className="text-neon-purple" size={20} />
+            Market Scorecard
+          </h3>
+          <table className="w-full text-xs border-collapse">
             <thead>
               <tr className="bg-gray-900 text-white">
-                <th className="px-4 py-3 text-left font-semibold">Moat Dimension</th>
-                <th className="px-4 py-3 text-left font-semibold">OpenAI / Perplexity</th>
-                <th className="px-4 py-3 text-left font-semibold">AlphaSense</th>
-                <th className="px-4 py-3 text-left font-semibold">Salesforce / HubSpot</th>
-                <th className="px-4 py-3 text-left font-semibold text-green-300">Omnisavant (Target)</th>
+                <th className="px-3 py-2 text-left font-semibold">Dimension</th>
+                <th className="px-3 py-2 text-left font-semibold">OpenAI</th>
+                <th className="px-3 py-2 text-left font-semibold">AlphaSense</th>
+                <th className="px-3 py-2 text-left font-semibold">Salesforce</th>
+                <th className="px-3 py-2 text-left font-semibold text-green-300">Omnisavant</th>
               </tr>
             </thead>
             <tbody>
               {[
-                ['Organizational memory', 'None', 'None (market data, not your org)', 'CRM records, no intelligence layer', 'This is the wedge — build it first'],
-                ['Vertical signal interpretation', 'Generic', 'Financial analysts only', 'Generic', 'Over-fit to B2B SaaS operators'],
-                ['Cross-team network effect', 'None', 'None', 'Partial (shared CRM)', 'Intra-org network effect — unique position'],
-                ['Compliance-native architecture', 'None', 'Bolted on', 'Bolted on', 'Build native — this is the CCO wedge'],
-                ['Outcome-based pricing', 'No', 'No', 'No', 'Design the measurement from day one'],
-                ['AI positioning', 'Capability-led', 'Capability-led', 'Feature-led', 'Outcome-led — "here\'s what you\'re about to miss"'],
-              ].map(([dim, openai, alpha, sfdc, omni], i) => (
+                ['Org memory', '✗', '✗', '~', '✓ Core wedge'],
+                ['Vertical depth', '✗', '~ Finance', '✗', '✓ B2B SaaS first'],
+                ['Cross-team network', '✗', '✗', '~', '✓ Intra-org effect'],
+                ['Compliance native', '✗', '~ Bolted', '~ Bolted', '✓ Architecture'],
+                ['Outcome pricing', '✗', '✗', '✗', '✓ Month 18'],
+                ['AI positioning', 'Capability', 'Capability', 'Feature', '✓ Outcome-led'],
+              ].map(([dim, a, b, c, d], i) => (
                 <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                  <td className="border border-gray-200 px-4 py-3 font-semibold text-gray-800">{dim}</td>
-                  <td className="border border-gray-200 px-4 py-3 text-red-600">{openai}</td>
-                  <td className="border border-gray-200 px-4 py-3 text-orange-600">{alpha}</td>
-                  <td className="border border-gray-200 px-4 py-3 text-orange-600">{sfdc}</td>
-                  <td className="border border-gray-200 px-4 py-3 text-green-700 font-semibold bg-green-50">{omni}</td>
+                  <td className="border border-gray-200 px-3 py-2 font-semibold text-gray-800">{dim}</td>
+                  <td className="border border-gray-200 px-3 py-2 text-red-500">{a}</td>
+                  <td className="border border-gray-200 px-3 py-2 text-orange-500">{b}</td>
+                  <td className="border border-gray-200 px-3 py-2 text-orange-500">{c}</td>
+                  <td className="border border-gray-200 px-3 py-2 text-green-700 font-semibold bg-green-50">{d}</td>
                 </tr>
               ))}
             </tbody>
@@ -433,18 +306,19 @@ export default function OmnisavantPositioning() {
       </div>
 
       {/* Closing */}
-      <div className="glass-card p-8 bg-gray-900 text-white border-0">
-        <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
-          <Lock className="text-electric" size={24} />
-          What Omnisavant Must Do That Nobody Else Can Copy
+      <div className="glass-card p-8 border-l-4 border-electric">
+        <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+          <Lock className="text-electric" size={20} />
+          What Nobody Else Can Copy
         </h3>
-        <p className="text-white mb-4"><strong className="text-electric">An incumbent cannot become Omnisavant.</strong> AlphaSense carries $930M in content licensing debt built for financial analysts — it cannot pivot to RevOps operators. Salesforce is a system of record with 20 years of backward-compatible feature debt. Claude and ChatGPT have no permission to accumulate institutional context inside an org&apos;s workflow.</p>
-        <p className="text-white mb-6">Omnisavant&apos;s advantage is structural, not technological. It is unburdened — with the wiggle room to sit in the exact layers that matter and build the exact memory that compounds. The window to move into those layers before incumbents retrofit their way in is 18–24 months.</p>
-        <div className="border border-electric/50 rounded-xl p-5 bg-electric/10">
-          <p className="text-electric font-bold text-lg">If a RevOps lead tried to remove Omnisavant in month 18, what would break?</p>
-          <p className="text-gray-300 mt-2 text-sm">That is the question to answer with every product decision made between now and then.</p>
+        <p className="text-gray-800 mb-3"><strong className="text-electric">An incumbent cannot become Omnisavant.</strong> AlphaSense carries $930M in content licensing debt built for financial analysts. Salesforce has 20 years of backward-compatible feature debt. Claude and ChatGPT have no permission to accumulate institutional context inside an org's workflow.</p>
+        <p className="text-gray-700 mb-6">Omnisavant's advantage is structural, not technological. It is unburdened — with the wiggle room to sit in the exact layers that matter and build the exact memory that compounds. The window is 18–24 months before incumbents retrofit their way in.</p>
+        <div className="bg-electric/8 border border-electric/25 rounded-xl p-5">
+          <p className="text-electric font-bold">If a RevOps lead tried to remove Omnisavant in month 18, what would break?</p>
+          <p className="text-gray-700 mt-1 text-sm">That is the question to answer with every product decision made between now and then.</p>
         </div>
       </div>
+
     </div>
   );
 }
