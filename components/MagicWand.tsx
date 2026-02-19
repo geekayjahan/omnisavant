@@ -603,45 +603,70 @@ export default function MagicWand() {
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 mb-8">
           {[
             {
-              label: 'Surfaces before you ask',
-              detail: 'Not a search box. Not a dashboard to check. A system that pushes the three things leadership doesn\'t know they need to know — into the meeting, into the Slack thread, before the decision is made.',
+              label: 'The problem it solves',
+              scene: 'A payment velocity anomaly appears in the risk system. A churn signal appears in Zendesk. A CFO renewal call is in 10 days. Three teams. Three tools. Nobody connects them. The call happens without context.',
+              solution: 'Omnisavant surfaces all three as a unified brief — before the call. The account is saved.',
               color: 'border-electric/30 bg-electric/5',
               accent: 'text-electric',
+              sceneLabel: 'Today',
+              solutionLabel: 'With Omnisavant',
             },
             {
-              label: 'Compliance is the product',
-              detail: 'Every signal has a source. Every AI recommendation has a reasoning chain. Every action has an audit trail. The CCO can answer any regulator question — 18 months back — in under an hour.',
+              label: 'How it gets in',
+              scene: 'Authorization once via MCP — not an integration project, not a 6-month IT roadmap. Credentials granted, first signal surfaced within the week.',
+              solution: 'It appears in Slack, in the channel the team already uses. Nobody logs into a new tool. Nobody changes how they work. It just shows up — already useful.',
               color: 'border-neon-pink/30 bg-neon-pink/5',
               accent: 'text-neon-pink',
+              sceneLabel: 'Access model',
+              solutionLabel: 'Delivery model',
             },
             {
-              label: 'Vertical-calibrated interpretation',
-              detail: 'Construction draw patterns, SaaS billing cycles, consumer early-cycle deterioration — the model knows the difference because it was trained on this vertical\'s decisions, not generic data.',
+              label: 'What it learns',
+              scene: 'Every signal surfaced carries a one-tap response: acted on / already knew / not relevant. 10 seconds. Repeated across every insight, every team, every week.',
+              solution: 'After 6 months the model knows what this fintech considers signal vs. noise — calibrated to this portfolio, these customers, this risk appetite. No competitor starts here.',
               color: 'border-neon-purple/30 bg-neon-purple/5',
               accent: 'text-neon-purple',
+              sceneLabel: 'The input',
+              solutionLabel: 'What compounds',
             },
             {
-              label: 'Priced against outcomes',
-              detail: 'Not per seat. Tied to accounts retained, losses avoided, decisions made faster. At month 18, the data exists to prove it. The pricing model shifts from SaaS cost line to ROI multiplier.',
+              label: 'What the regulator sees',
+              scene: '"Show us every AI-influenced decision on this account for the past 18 months. What data was used? Who saw it? What was done?"',
+              solution: 'The audit log is live from day one. Source provenance, reasoning chain, action trail — exportable in under an hour. The CCO signs off. The deal survives the audit.',
               color: 'border-cyber-teal/30 bg-cyber-teal/5',
               accent: 'text-cyber-teal',
+              sceneLabel: 'Regulator question',
+              solutionLabel: 'Omnisavant answer',
             },
             {
-              label: 'Gets harder to remove over time',
-              detail: 'After 24 months it holds the org\'s complete signal-to-decision history. It knows what worked and what didn\'t. Removing it means starting that accumulation from zero. No one does that voluntarily.',
+              label: 'Why it cannot be removed',
+              scene: 'At month 24 a competitor pitches. The pitch is good. Procurement opens the conversation.',
+              solution: 'Removing Omnisavant means losing 24 months of decision traces, the org-specific signal model, the compliance audit trail, and the cross-team signal connections embedded in daily Slack. The procurement committee closes the file.',
               color: 'border-electric/30 bg-electric/5',
               accent: 'text-electric',
+              sceneLabel: 'The threat',
+              solutionLabel: 'Why it fails',
             },
             {
-              label: 'Scales cross-team, not per-user',
-              detail: 'Value compounds as more teams connect. Risk surfaces a flag → CS sees it → Sales goes into the renewal call informed. The network effect is internal. That\'s rare in B2B SaaS. Build it deliberately.',
+              label: 'What it costs vs. what it returns',
+              scene: 'Per-seat SaaS pricing disconnects payment from value. A customer at month 24 derives 10× the value of month 1 — and pays the same. Every renewal is a fresh negotiation.',
+              solution: 'Pricing tied to accounts retained, losses avoided, escalations caught. At month 18 the data exists to prove it. The conversation shifts from "what does this cost?" to "how much did this save?"',
               color: 'border-neon-pink/30 bg-neon-pink/5',
               accent: 'text-neon-pink',
+              sceneLabel: 'The wrong model',
+              solutionLabel: 'The right model',
             },
           ].map((card, i) => (
-            <div key={i} className={`border rounded-xl p-5 ${card.color}`}>
-              <p className={`text-sm font-bold uppercase tracking-wide mb-2 ${card.accent}`}>{card.label}</p>
-              <p className="text-sm text-gray-700 leading-relaxed">{card.detail}</p>
+            <div key={i} className={`border rounded-xl p-5 ${card.color} flex flex-col gap-3`}>
+              <p className={`text-sm font-bold uppercase tracking-wide ${card.accent}`}>{card.label}</p>
+              <div className="bg-white/60 rounded-lg px-3 py-2.5">
+                <p className={`text-xs font-semibold mb-1 ${card.accent} opacity-70`}>{card.sceneLabel}</p>
+                <p className="text-sm text-gray-600 leading-relaxed">{card.scene}</p>
+              </div>
+              <div className="bg-white/80 rounded-lg px-3 py-2.5">
+                <p className={`text-xs font-semibold mb-1 ${card.accent}`}>{card.solutionLabel}</p>
+                <p className="text-sm text-gray-800 leading-relaxed font-medium">{card.solution}</p>
+              </div>
             </div>
           ))}
         </div>

@@ -187,7 +187,11 @@ function RadarChart() {
   );
 }
 
-const competitors = [
+type VerdictType = 'opportunity' | 'threat' | 'window' | 'learn';
+type MoatStatus = 'underbuilt' | 'unbuilt' | 'strategic' | 'misequenced';
+type RiskSeverity = 'high' | 'medium';
+
+const competitors: { name: string; owns: string; edge: string; gap: string; verdict: string; verdictType: VerdictType }[] = [
   {
     name: 'Glean',
     owns: 'Enterprise knowledge graph. 100+ connectors, $200M ARR, $7.2B valuation.',
@@ -230,7 +234,7 @@ const competitors = [
   },
 ];
 
-const moats = [
+const moats: { id: number; name: string; subtitle: string; current: string; verdict: string; status: MoatStatus; phase: string }[] = [
   {
     id: 1,
     name: 'Organizational Memory',
@@ -287,7 +291,7 @@ const moats = [
   },
 ];
 
-const risks = [
+const risks: { id: number; title: string; description: string; severity: RiskSeverity }[] = [
   {
     id: 1,
     title: 'The "insights dashboard" ceiling',
