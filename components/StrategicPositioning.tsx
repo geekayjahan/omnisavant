@@ -656,15 +656,10 @@ export default function StrategicPositioning() {
               <p className="text-sm text-gray-300 leading-relaxed">Organizational decision memory infrastructure. No direct comp set. After 24 months, contains the org's complete signal-to-decision-to-outcome history. Removing Omnisavant is an act of institutional self-harm.</p>
             </div>
           </div>
-          <div className="border-t border-gray-700 pt-6 space-y-4">
+          <div className="border-t border-gray-700 pt-6">
             <p className="text-sm text-gray-300 leading-relaxed">
               The winners in AI don't win on AI — Harvey won on workflow depth, Sierra on pricing alignment, Cursor on muscle memory. This choice is rarely made in a strategy session. It's made through small product decisions: Salesforce connector or MCP authorization; dashboard or Slack signal; per-seat pricing or revenue tied to accounts saved.
             </p>
-            <div className="rounded-lg border border-violet-700 bg-gray-800 p-4">
-              <p className="text-sm text-gray-300 leading-relaxed">
-                The model is no longer the product. <span className="text-white font-semibold">The product is the enterprise-native layer built on top of it</span> — compliance from day zero, targeting CCOs not VP Product, and a system so embedded that after two years, removing it means losing institutional memory, audit trails, and calibrated signal history no vendor can restore. <span className="text-white font-semibold">That moat has to be built from the first line of code.</span>
-              </p>
-            </div>
           </div>
         </div>
       </section>
