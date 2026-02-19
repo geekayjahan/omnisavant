@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Target, Zap, Shield, TrendingUp, Brain, Lock, FileText, Crosshair, Wand2 } from 'lucide-react';
+import { Target, Zap, Shield, TrendingUp, Brain, Lock, FileText, Wand2 } from 'lucide-react';
 import { companies, strategies, moatPatterns, keyInsights, defensibilityTiers } from '@/data/insights';
 import MoatArchetypeGrid from '@/components/MoatArchetypeGrid';
 import StrategyPlaybook from '@/components/StrategyPlaybook';
@@ -9,11 +9,10 @@ import CompanyIntelligence from '@/components/CompanyIntelligence';
 import InsightClassifier from '@/components/InsightClassifier';
 import DefensibilityRadar from '@/components/DefensibilityRadar';
 import MoatAnalysis from '@/components/MoatAnalysis';
-import OmnisavantPositioning from '@/components/OmnisavantPositioning';
 import MagicWand from '@/components/MagicWand';
 
 export default function Dashboard() {
-  const [activeView, setActiveView] = useState<'overview' | 'moats' | 'strategies' | 'companies' | 'moat-analysis' | 'positioning' | 'magic-wand'>('overview');
+  const [activeView, setActiveView] = useState<'overview' | 'moats' | 'strategies' | 'companies' | 'moat-analysis' | 'magic-wand'>('overview');
 
   const views = [
     { id: 'overview', label: 'Intelligence Overview', icon: Brain },
@@ -21,8 +20,7 @@ export default function Dashboard() {
     { id: 'strategies', label: 'Strategic Playbooks', icon: Target },
     { id: 'companies', label: 'Company Analysis', icon: TrendingUp },
     { id: 'moat-analysis', label: 'Moat Analysis', icon: FileText },
-    { id: 'positioning', label: 'Omnisavant Positioning', icon: Crosshair },
-    { id: 'magic-wand', label: 'Magic Wand', icon: Wand2 },
+{ id: 'magic-wand', label: 'Magic Wand', icon: Wand2 },
   ];
 
   return (
@@ -130,7 +128,6 @@ export default function Dashboard() {
         {activeView === 'strategies' && <StrategyPlaybook strategies={strategies} />}
         {activeView === 'companies' && <CompanyIntelligence companies={companies} />}
         {activeView === 'moat-analysis' && <MoatAnalysis />}
-        {activeView === 'positioning' && <OmnisavantPositioning />}
         {activeView === 'magic-wand' && <MagicWand />}
       </main>
     </div>
