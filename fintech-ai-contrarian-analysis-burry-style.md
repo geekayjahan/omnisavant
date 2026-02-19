@@ -22,6 +22,7 @@ Let me summarize what $116B in fintech funding in 2025 tells us the market belie
 
 **The Capital Flows:**
 - 58% of all VC went to AI deals in 2025
+- Crypto/stablecoins captured 2/3 of all fintech fund allocations
 - Revolut raised $3B at $75B valuation
 - AI payments companies got 80% more funding YoY
 
@@ -60,9 +61,7 @@ This is synthetic CDOs all over again. The product (AI-powered fintech) is rated
 
 - **Compliance-NATIVE AI infrastructure** where compliance scales automatically with growth
 - **Explainable AI that regulators can actually audit** (not black boxes)
-- **Real-time AML monitoring that works at fintec
-
-h scale** (not batch processing retrofitted)
+- **Real-time AML monitoring that works at fintech scale** (not batch processing retrofitted)
 - **Compliance data warehouses** that can produce loan-level audit trails on demand
 
 The opportunity is unsexy: build the compliance infrastructure everyone skipped to chase growth. Charge 2-3% of AML budget ($30B+ market). Position as "regulatory survival insurance" not "faster onboarding."
@@ -168,63 +167,6 @@ One multi-billion dollar settlement will reset the entire industry.
 The opportunity: Build the rails that make AI lending legally defensible. Charge per-decision with full audit trail. Market it as "legal liability insurance for AI."
 
 ---
-
-### Finding #4: Everyone's Building Payments Infrastructure. Nobody's Building Settlement Infrastructure.
-
-**What everyone's building:**
-
-- Stablecoins (raised billions)
-- Embedded payments APIs
-- Instant payment rails
-- Cross-border remittance
-- Crypto on-ramps/off-ramps
-
-**What everyone's ignoring:**
-
-**The actual problem isn't moving money FASTER. It's reconciling it ACCURATELY.**
-
-Data points nobody connects:
-- **EU Instant Payments Regulation (Oct 2025):** ALL payments must complete in 10 seconds
-- **Batch screening no longer works** - need real-time sanctions/AML checks
-- **Regulators expect "parallel screening pipelines, fallback logic, alert triage"**
-- **Block Inc fined $120M** partly for transaction monitoring failures
-- **Banks increasingly sharing fraud data** in real-time (Barclays, HSBC, Lloyds + Amazon, Google, Meta)
-
-**The Structural Problem:**
-
-Instant payments create instant reconciliation nightmares. When a payment clears in 10 seconds:
-- Sanctions screening must happen in <5 seconds
-- Fraud detection must happen in <5 seconds  
-- AML monitoring must be real-time, not batch
-- If you flag it AFTER settlement, you're doing a clawback (expensive, customer-hostile)
-
-Currently: Most fintechs run batch processes overnight. This breaks with instant settlements.
-
-**What's Actually Needed:**
-
-- **Real-time sanctions screening** against constantly updating lists
-- **Streaming AML** (event-driven, not batch)
-- **Intelligent routing** that automatically holds suspicious transactions before settlement
-- **Reconciliation infrastructure** that handles multi-party, cross-border, instant settlements
-- **Dispute resolution** for instant payments (chargebacks are 60-90 days - doesn't work for 10-second settlements)
-
-**The Burry Take:**
-
-This is infrastructure debt. Everyone's building the sexy frontend (instant payments!). Nobody's building the unsexy backend (instant reconciliation!). The first major fraud wave through instant payment rails will expose the gap violently.
-
-Banks know this, which is why they're going slow. Fintechs don't care, which is why they're going fast. Regulators will force convergence through enforcement.
-
-**What Nobody's Building:**
-
-- **Real-time reconciliation engines** for instant payment rails
-- **Streaming compliance** infrastructure (Kafka for AML)
-- **Multi-party settlement layers** that handle disputes instantly
-- **Fallback/rollback** mechanisms for flagged transactions
-
-The opportunity: Build the settlement infrastructure layer. License to fintechs who need instant payments but don't have compliance infrastructure. Charge basis points on transaction volume.
-
----
-
 
 ## THE GAPS NOBODY'S TALKING ABOUT
 
@@ -511,22 +453,7 @@ If I were allocating capital with Burry's mindset (bet against consensus, follow
 
 ---
 
-### Investment #4: Real-Time Settlement Infrastructure
-**Thesis:** Instant payments without instant reconciliation is a disaster waiting to happen.
-
-**Product:**
-- Real-time sanctions screening
-- Streaming AML
-- Multi-party settlement
-- Dispute resolution for instant payments
-
-**Business Model:** Basis points on transaction volume
-
-**Why It Wins:** Becomes required infrastructure when instant payments are mandated. Critical path dependency.
-
----
-
-### Investment #5: Non-Traditional Income Underwriting Platform
+### Investment #4: Non-Traditional Income Underwriting Platform
 **Thesis:** $1T+ market of creditworthy people systematically excluded from lending.
 
 **Product:**
@@ -548,10 +475,7 @@ First major lawsuit will devastate the sector. Anything using black-box models f
 ### Short #2: Consumer Neobanks in Saturated Markets
 Unit economics don't work. Customer acquisition costs rising. Path to profitability unclear. Consolidation inevitable.
 
-### Short #3: B2B Payments Platforms Without Settlement Infrastructure
-Instant payments are coming. They don't have instant reconciliation. Fraud losses will spike.
-
-### Short #4: "AI Agents" That Are Just ChatGPT Wrappers
+### Short #3: "AI Agents" That Are Just ChatGPT Wrappers
 No defensible moat. OpenAI will eat them. Commoditizing fast.
 
 ---
@@ -564,7 +488,6 @@ The fundamental problem with fintech AI in 2025 is this:
 
 - Fintechs scaled customer acquisition 10X faster than compliance infrastructure
 - They deployed AI for speed, not for auditability
-- They built instant payments without instant reconciliation
 - They pursued retail hype while missing mid-market boring money
 - They chased consumer credit while ignoring SMB data infrastructure
 
@@ -579,14 +502,12 @@ When incentives misalign with reality, eventually reality wins. The misalignment
 
 1. **Regulatory Crackdown:** AML fines already up 417%. More coming. Existential for some.
 2. **AI Liability Wave:** First major lending discrimination lawsuit will reset the industry.
-3. **Instant Payment Fraud Spike:** When instant settlements go mainstream, fraud will surge (no time to screen).
 
 **The opportunity:**
 
 Build what survives the crackdown:
 - Compliance infrastructure (boring, essential)
 - Data verification (unsexy, critical)
-- Real-time settlement (complex, necessary)
 - Explainable AI (legally required)
 - Mid-market commercial banking (neglected, profitable)
 
@@ -617,7 +538,6 @@ If the answer to any of these is "no," you have existential risk.
 **The unsexy opportunities:**
 - Compliance infrastructure
 - Data verification
-- Settlement/reconciliation
 - Audit trails
 - Explainable AI
 - Mid-market B2B
@@ -627,7 +547,6 @@ If the answer to any of these is "no," you have existential risk.
 **The sexy distractions:**
 - AI agents (probably wrappers)
 - Consumer neobanks (saturated)
-- Prediction markets (possibly betting/gambling rebranded)
 
 **The Burry principle:**
 
