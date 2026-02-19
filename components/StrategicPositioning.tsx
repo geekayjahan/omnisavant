@@ -2,6 +2,191 @@
 
 import { AlertTriangle, TrendingUp, Shield, Zap, Target, CheckCircle, XCircle, Clock, ArrowRight } from 'lucide-react';
 
+// ─── CHART 1: Competitive Positioning Scatter ────────────────────────────────
+// X: Data Coverage (structured → unstructured)
+// Y: Switching Cost / Lock-in (low → high)
+// Omnisavant's current position vs where it needs to be
+
+const scatterPlayers = [
+  { name: 'QuadSci',            x: 15, y: 30,  r: 5,  color: '#ef4444', label: 'right' },
+  { name: 'Glean',              x: 35, y: 55,  r: 9,  color: '#f97316', label: 'right' },
+  { name: 'MS Copilot',         x: 30, y: 40,  r: 10, color: '#3b82f6', label: 'left'  },
+  { name: 'SF Agentforce',      x: 25, y: 50,  r: 10, color: '#8b5cf6', label: 'left'  },
+  { name: 'Sierra AI',          x: 40, y: 75,  r: 7,  color: '#10b981', label: 'right' },
+  { name: 'Omnisavant (today)', x: 70, y: 25,  r: 7,  color: '#1e293b', label: 'right', dashed: true },
+  { name: 'Omnisavant (2028)',  x: 80, y: 82,  r: 7,  color: '#1e293b', label: 'right', target: true },
+];
+
+function CompetitiveScatter() {
+  const W = 560; const H = 340;
+  const padL = 56; const padR = 20; const padT = 20; const padB = 44;
+  const cW = W - padL - padR;
+  const cH = H - padT - padB;
+
+  const toX = (v: number) => padL + (v / 100) * cW;
+  const toY = (v: number) => padT + ((100 - v) / 100) * cH;
+
+  const gridLines = [0, 25, 50, 75, 100];
+
+  return (
+    <svg viewBox={`0 0 ${W} ${H}`} className="w-full" style={{ maxHeight: 340 }}>
+      {/* grid */}
+      {gridLines.map(g => (
+        <g key={g}>
+          <line x1={toX(g)} y1={padT} x2={toX(g)} y2={padT + cH} stroke="#e5e7eb" strokeWidth="1" />
+          <line x1={padL} y1={toY(g)} x2={padL + cW} y2={toY(g)} stroke="#e5e7eb" strokeWidth="1" />
+        </g>
+      ))}
+
+      {/* white-space annotation */}
+      <rect x={toX(58)} y={toY(98)} width={toX(98) - toX(58)} height={toY(55) - toY(98)}
+        fill="#f0fdf4" stroke="#86efac" strokeWidth="1" strokeDasharray="4 3" rx="6" />
+      <text x={toX(78)} y={toY(78)} textAnchor="middle" fontSize="9" fill="#16a34a" fontWeight="600">
+        Omnisavant
+      </text>
+      <text x={toX(78)} y={toY(78) + 12} textAnchor="middle" fontSize="9" fill="#16a34a">
+        target zone
+      </text>
+
+      {/* arrow today → 2028 */}
+      <defs>
+        <marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill="#1e293b" />
+        </marker>
+      </defs>
+      <line
+        x1={toX(70)} y1={toY(25)}
+        x2={toX(79)} y2={toY(80)}
+        stroke="#1e293b" strokeWidth="1.5" strokeDasharray="5 3"
+        markerEnd="url(#arr)"
+      />
+
+      {/* players */}
+      {scatterPlayers.map((p) => (
+        <g key={p.name}>
+          <circle
+            cx={toX(p.x)} cy={toY(p.y)} r={p.r}
+            fill={p.target ? 'none' : p.color}
+            stroke={p.color}
+            strokeWidth={p.target ? 2 : 0}
+            strokeDasharray={p.dashed ? '4 2' : undefined}
+            opacity={p.dashed ? 0.6 : 0.85}
+          />
+          <text
+            x={p.label === 'right' ? toX(p.x) + p.r + 4 : toX(p.x) - p.r - 4}
+            y={toY(p.y) + 4}
+            textAnchor={p.label === 'right' ? 'start' : 'end'}
+            fontSize="9.5"
+            fill={p.target ? '#16a34a' : '#374151'}
+            fontWeight={p.name.startsWith('Omnisavant') ? '700' : '400'}
+          >
+            {p.name}
+          </text>
+        </g>
+      ))}
+
+      {/* axes */}
+      <line x1={padL} y1={padT} x2={padL} y2={padT + cH} stroke="#9ca3af" strokeWidth="1.5" />
+      <line x1={padL} y1={padT + cH} x2={padL + cW} y2={padT + cH} stroke="#9ca3af" strokeWidth="1.5" />
+
+      {/* axis labels */}
+      <text x={padL + cW / 2} y={H - 6} textAnchor="middle" fontSize="10" fill="#6b7280" fontWeight="600">
+        Data Coverage  ←  Structured only · · · Unstructured + Cross-platform  →
+      </text>
+      <text
+        x={14} y={padT + cH / 2}
+        textAnchor="middle" fontSize="10" fill="#6b7280" fontWeight="600"
+        transform={`rotate(-90, 14, ${padT + cH / 2})`}
+      >
+        Switching Cost / Lock-in
+      </text>
+    </svg>
+  );
+}
+
+// ─── CHART 2: Moat Readiness Radar ───────────────────────────────────────────
+// 6 axes, one per moat. Score = current build state (0–10).
+// Two overlaid polygons: current vs potential
+
+const radarAxes = [
+  { label: 'Org Memory',       current: 3, potential: 10 },
+  { label: 'Signal Loop',      current: 1, potential: 9  },
+  { label: 'Cross-Team FX',    current: 4, potential: 9  },
+  { label: 'Workflow Embed',   current: 2, potential: 9  },
+  { label: 'Vertical Depth',   current: 2, potential: 8  },
+  { label: 'Compliance Arch',  current: 1, potential: 8  },
+];
+
+function RadarChart() {
+  const cx = 200; const cy = 170; const R = 130; const n = radarAxes.length;
+  const levels = [2, 4, 6, 8, 10];
+
+  const angle = (i: number) => (Math.PI * 2 * i) / n - Math.PI / 2;
+  const point = (val: number, i: number) => ({
+    x: cx + (val / 10) * R * Math.cos(angle(i)),
+    y: cy + (val / 10) * R * Math.sin(angle(i)),
+  });
+  const poly = (vals: number[]) =>
+    vals.map((v, i) => { const p = point(v, i); return `${p.x},${p.y}`; }).join(' ');
+
+  return (
+    <svg viewBox="0 0 400 340" className="w-full" style={{ maxHeight: 340 }}>
+      {/* level rings */}
+      {levels.map((lv) => (
+        <polygon
+          key={lv}
+          points={Array.from({ length: n }, (_, i) => point(lv, i))
+            .map(p => `${p.x},${p.y}`).join(' ')}
+          fill="none" stroke="#e5e7eb" strokeWidth="1"
+        />
+      ))}
+
+      {/* spokes */}
+      {radarAxes.map((_, i) => {
+        const outer = point(10, i);
+        return <line key={i} x1={cx} y1={cy} x2={outer.x} y2={outer.y} stroke="#e5e7eb" strokeWidth="1" />;
+      })}
+
+      {/* potential polygon */}
+      <polygon
+        points={poly(radarAxes.map(a => a.potential))}
+        fill="#dcfce7" stroke="#22c55e" strokeWidth="1.5" opacity="0.5"
+      />
+
+      {/* current polygon */}
+      <polygon
+        points={poly(radarAxes.map(a => a.current))}
+        fill="#1e293b" stroke="#1e293b" strokeWidth="2" opacity="0.7"
+      />
+
+      {/* axis labels */}
+      {radarAxes.map((ax, i) => {
+        const p = point(11.5, i);
+        const anchor =
+          Math.cos(angle(i)) > 0.2 ? 'start' :
+          Math.cos(angle(i)) < -0.2 ? 'end' : 'middle';
+        return (
+          <text key={i} x={p.x} y={p.y + 4} textAnchor={anchor} fontSize="10.5" fill="#374151" fontWeight="600">
+            {ax.label}
+          </text>
+        );
+      })}
+
+      {/* score dots — current */}
+      {radarAxes.map((ax, i) => {
+        const p = point(ax.current, i);
+        return <circle key={i} cx={p.x} cy={p.y} r="3.5" fill="#1e293b" />;
+      })}
+
+      {/* legend */}
+      <rect x="248" y="290" width="12" height="12" fill="#1e293b" opacity="0.7" rx="2" />
+      <text x="264" y="300" fontSize="10" fill="#374151">Current state</text>
+      <rect x="248" y="310" width="12" height="12" fill="#dcfce7" stroke="#22c55e" strokeWidth="1.5" rx="2" />
+      <text x="264" y="320" fontSize="10" fill="#374151">Full potential</text>
+    </svg>
+  );
+}
+
 const competitors = [
   {
     name: 'Glean',
@@ -314,6 +499,27 @@ export default function StrategicPositioning() {
         </div>
       </section>
 
+      {/* COMPETITIVE SCATTER */}
+      <section>
+        <SectionLabel number="↳" title="Competitive Positioning Map" />
+        <p className="text-gray-600 text-sm leading-relaxed mb-4">
+          Plotted on two axes that matter: how much of the enterprise data universe each player can see, and how hard they are to remove. The green zone is Omnisavant's destination — high coverage, high lock-in. Nobody else is there.
+        </p>
+        <div className="rounded-xl border border-gray-200 bg-white p-6">
+          <CompetitiveScatter />
+          <div className="flex items-center gap-6 mt-4 pt-4 border-t border-gray-100 flex-wrap">
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded-full bg-gray-900 opacity-60 border border-gray-900" style={{borderStyle:'dashed'}} />
+              <span className="text-xs text-gray-500">Omnisavant today — high data coverage potential, low lock-in</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded-full border-2 border-gray-900" />
+              <span className="text-xs text-gray-500">Omnisavant 2028 target — uncontested zone</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* SECTION 4 — MOAT ARCHITECTURE */}
       <section>
         <SectionLabel number="04" title="The Moat Architecture — Honest Assessment" />
@@ -352,6 +558,20 @@ export default function StrategicPositioning() {
               </div>
             );
           })}
+        </div>
+
+        {/* Radar chart */}
+        <div className="mt-8 rounded-xl border border-gray-200 bg-white p-6">
+          <div className="flex items-start justify-between mb-2">
+            <div>
+              <p className="text-sm font-bold text-gray-900">Moat Readiness — Current vs. Full Potential</p>
+              <p className="text-xs text-gray-500 mt-0.5">Scored 0–10. Dark polygon = where Omnisavant is today. Green = what the architecture is capable of.</p>
+            </div>
+          </div>
+          <RadarChart />
+          <p className="text-xs text-gray-400 text-center mt-2">
+            The gap is not technology. It is sequencing, narrative, and product decisions made in the next 90 days.
+          </p>
         </div>
 
         {/* Sequencing visual */}
