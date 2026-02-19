@@ -280,8 +280,8 @@ const moats = [
     id: 6,
     name: 'Compliance Architecture',
     subtitle: 'The CCO\'s budget is not discretionary',
-    current: 'Sequenced to Phase 3 in current plan. Wrong. Any customer data under HIPAA, GDPR, or SOC 2 requires this from day zero. EU AI Act Article 19 mandates audit logs for high-risk AI — making Omnisavant\'s audit trail a legal requirement, not a feature.',
-    verdict: 'Move to Day 0. It is the trust infrastructure that unlocks enterprise access.',
+    current: 'Sequenced to Phase 3 in current plan. Wrong. Enterprises do not hand authorization to their internal data to a startup without a compliance architecture they can show their legal team. EU AI Act Article 19 mandates audit logs for high-risk AI. HIPAA, SOC 2, GDPR create procurement gates that close deals before they open. More than that: the audit trail IS the product — it is what makes Omnisavant the source of defensible decision records, not just another intelligence tool.',
+    verdict: 'Day 0 infrastructure, not Month 18 GTM. Compliance is not the price of entry — it is the product that earns enterprise trust.',
     status: 'misequenced',
     phase: 'Day 0',
   },
@@ -297,7 +297,7 @@ const risks = [
   {
     id: 2,
     title: 'Savant Engine commoditises faster than expected',
-    description: 'GPT-5 and Claude 4 already handle multi-document synthesis across 200K+ tokens. If interpretation quality erodes before org-specific context has accumulated, the product becomes "RAG over your Intercom data" — a feature, not a company. Mitigation: org-specific context accumulation must be the core product motion from day one.',
+    description: 'Frontier models — Claude, Gemini, GPT — now operate at context windows that make general-purpose document synthesis trivially accessible to any enterprise. The moat is not interpretation quality. It is the org-specific context, decision traces, and calibrated signal history that Omnisavant accumulates and that no foundation model can replicate by switching on. If that accumulation hasn\'t started on day one of the design partner phase, the window closes.',
     severity: 'high',
   },
   {
@@ -414,11 +414,23 @@ export default function StrategicPositioning() {
             <p className="text-sm text-gray-600">Less than 1% of enterprise unstructured data is AI-ready (IDC, 2026). Enterprises will not clean their data before buying intelligence. The tool that works on data as it exists — not as you wish it existed — wins by default.</p>
           </div>
         </div>
-        <div className="mt-4 rounded-xl border border-gray-200 bg-gray-50 p-5">
-          <p className="text-sm text-gray-600">
-            <span className="font-semibold text-gray-800">The agentic wave adds urgency:</span>{' '}
-            Gartner predicts 15% of day-to-day work decisions will be made autonomously by 2028. The "recommended actions" layer in Omnisavant's PRFAQ is exactly where this is heading — but it must be built as agent-ready infrastructure, not a suggestions panel, or the platforms will absorb it.
-          </p>
+        <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="rounded-xl border border-gray-200 bg-gray-50 p-5">
+            <p className="text-sm text-gray-600">
+              <span className="font-semibold text-gray-800">The agentic wave adds urgency:</span>{' '}
+              Gartner predicts 15% of day-to-day work decisions will be made autonomously by 2028. The "recommended actions" layer is exactly where this is heading — but it must be built as agent-ready infrastructure from day one, or the platforms absorb it.
+            </p>
+          </div>
+          <div className="rounded-xl border border-violet-200 bg-violet-50 p-5">
+            <div className="flex items-center gap-2 mb-2">
+              <Zap className="w-4 h-4 text-violet-600" />
+              <span className="text-xs font-semibold text-violet-700 uppercase tracking-wide">The New Baseline</span>
+            </div>
+            <p className="text-sm text-gray-700">
+              <span className="font-semibold">Claude-class models are the commodity now.</span>{' '}
+              Any enterprise can access frontier AI. That is no longer the differentiator. What enterprises cannot access off the shelf: a model calibrated to their org, a compliance layer their legal team trusts, and a system that took years to embed into their workflows. Omnisavant's bet is that the hard part is not the AI — it is earning the right to sit inside the enterprise.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -652,11 +664,16 @@ export default function StrategicPositioning() {
               <p className="text-sm text-gray-300 leading-relaxed">Organizational decision memory infrastructure. No direct comp set. After 24 months, contains the org's complete signal-to-decision-to-outcome history. Removing Omnisavant is an act of institutional self-harm.</p>
             </div>
           </div>
-          <div className="border-t border-gray-700 pt-6">
+          <div className="border-t border-gray-700 pt-6 space-y-4">
             <p className="text-sm text-gray-300 leading-relaxed">
-              Both are buildable from the current architecture. The winners in AI don't win on AI — Harvey won on workflow depth, Abridge on human calibration, Sierra on pricing alignment, Cursor on muscle memory. Omnisavant is at the moment where that choice gets made. It is usually made not in a strategy session but through a thousand small product decisions: whether to build the Salesforce connector or get authorization via MCP; whether to launch a dashboard or surface signals in Slack; whether to price per seat or tie revenue to accounts saved.{' '}
-              <span className="text-white font-semibold">Hold the architecture. Only one of these two versions is defensible in 2028.</span>
+              Both are buildable from the current architecture. The winners in AI don't win on AI — Harvey won on workflow depth, Abridge on human calibration, Sierra on pricing alignment, Cursor on muscle memory. Omnisavant is at the moment where that choice gets made. It is usually made not in a strategy session but through a thousand small product decisions: whether to build the Salesforce connector or get authorization via MCP; whether to launch a dashboard or surface signals in Slack; whether to price per seat or tie revenue to accounts saved.
             </p>
+            <div className="rounded-lg border border-violet-700 bg-gray-800 p-4">
+              <p className="text-xs font-semibold text-violet-400 uppercase tracking-widest mb-2">What this means in practice</p>
+              <p className="text-sm text-gray-300 leading-relaxed">
+                Claude, Gemini, GPT — enterprises can call these APIs today. The model is no longer the product. The product is the enterprise-native layer that sits on top: compliance baked into the architecture from day zero, not bolted on at month eighteen; an onboarding motion that targets CCOs and GMs, not VP Product; a system designed so that after twenty-four months, ripping it out means an enterprise loses its institutional memory, its audit trail, and two years of calibrated signal history. <span className="text-white font-semibold">That is what takes years to replicate. That is the moat. And it has to be built from the first line of code — not when the sales team asks for it.</span>
+              </p>
+            </div>
           </div>
         </div>
       </section>

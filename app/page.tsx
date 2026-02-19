@@ -21,8 +21,8 @@ export default function Dashboard() {
     { id: 'strategies', label: 'Strategic Playbooks', icon: Target },
     { id: 'companies', label: 'Company Analysis', icon: TrendingUp },
     { id: 'moat-analysis', label: 'Moat Analysis', icon: FileText },
-    { id: 'magic-wand', label: 'Magic Wand', icon: Wand2 },
     { id: 'strategic-positioning', label: 'Strategic Positioning', icon: Compass },
+    { id: 'magic-wand', label: 'Magic Wand', icon: Wand2 },
   ];
 
   return (
