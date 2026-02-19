@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Target, Zap, Shield, TrendingUp, Brain, Lock, FileText, Wand2 } from 'lucide-react';
+import { Target, Zap, Shield, TrendingUp, Brain, Lock, FileText, Wand2, Compass } from 'lucide-react';
 import { companies, strategies, moatPatterns, keyInsights, defensibilityTiers } from '@/data/insights';
 import MoatArchetypeGrid from '@/components/MoatArchetypeGrid';
 import StrategyPlaybook from '@/components/StrategyPlaybook';
@@ -10,9 +10,10 @@ import InsightClassifier from '@/components/InsightClassifier';
 import DefensibilityRadar from '@/components/DefensibilityRadar';
 import MoatAnalysis from '@/components/MoatAnalysis';
 import MagicWand from '@/components/MagicWand';
+import StrategicPositioning from '@/components/StrategicPositioning';
 
 export default function Dashboard() {
-  const [activeView, setActiveView] = useState<'overview' | 'moats' | 'strategies' | 'companies' | 'moat-analysis' | 'magic-wand'>('overview');
+  const [activeView, setActiveView] = useState<'overview' | 'moats' | 'strategies' | 'companies' | 'moat-analysis' | 'magic-wand' | 'strategic-positioning'>('overview');
 
   const views = [
     { id: 'overview', label: 'Intelligence Overview', icon: Brain },
@@ -20,7 +21,8 @@ export default function Dashboard() {
     { id: 'strategies', label: 'Strategic Playbooks', icon: Target },
     { id: 'companies', label: 'Company Analysis', icon: TrendingUp },
     { id: 'moat-analysis', label: 'Moat Analysis', icon: FileText },
-{ id: 'magic-wand', label: 'Magic Wand', icon: Wand2 },
+    { id: 'magic-wand', label: 'Magic Wand', icon: Wand2 },
+    { id: 'strategic-positioning', label: 'Strategic Positioning', icon: Compass },
   ];
 
   return (
@@ -129,6 +131,7 @@ export default function Dashboard() {
         {activeView === 'companies' && <CompanyIntelligence companies={companies} />}
         {activeView === 'moat-analysis' && <MoatAnalysis />}
         {activeView === 'magic-wand' && <MagicWand />}
+        {activeView === 'strategic-positioning' && <StrategicPositioning />}
       </main>
     </div>
   );
