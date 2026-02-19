@@ -33,3 +33,28 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# working files — docs, decks, research, scripts
+*.pdf
+*.pptx
+*.docx
+*.deck
+*.xlsx
+*.png
+*.jpg
+*.jpeg
+generate-*.js
+omnisavant-deck.js
+package-lock.json
+AI-written-expressions-ban.txt
+call-notes
+context
+prfaq-v1
+hedge-fund-picker/
+alphasense-moat-strategy.md
+moat-against-alpha-sense.md
+omnisavant-moat.md
+omnisavant-strategic-positioning.md
+prd-10-10-template.md
+prfaq-improbable-template.md
+fintech-ai-contrarian-analysis-burry-style.md
