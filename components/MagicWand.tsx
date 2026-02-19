@@ -52,14 +52,14 @@ const moats = [
     number: '5', icon: Globe, color: 'electric',
     name: 'Vertical Specialization',
     subtitle: 'Interpretation That Cannot Be Generic',
-    what: '"Churn signal" in B2B SaaS, "delinquency" in SMB lending, "counterparty risk" in institutional payments — entirely different things. Generic AI gives one answer for all three. Over-fit to the vertical. The first 5 design partners generate labeled data that makes Omnisavant smarter for the next 50.',
+    what: 'No underwriter at a construction lender is going to ChatGPT to interpret a borrower\'s Q4 draw pattern. No AML analyst at a payments firm asks a general-purpose model whether a transaction cluster is geographic expansion or structuring. They don\'t trust it — and they\'re right not to. Generic AI has no baseline for this org, this portfolio, or this vertical\'s seasonal rhythms. It flags everything or nothing. Omnisavant builds vertical interpretation from the ground up: the first 5 design partners generate labeled decision history that makes every subsequent call smarter. By month 12, the model knows what "anomalous" actually means for this lender.',
     fintech: null,
     verticalTable: [
-      { vertical: 'Construction lending', generic: '"Investigate."', omnisavant: '"Q4 draw pattern — monitor, no action."' },
-      { vertical: 'SaaS lending', generic: '"Investigate."', omnisavant: '"Billing cycle shift — check annual vs monthly."' },
-      { vertical: 'Retail lending', generic: '"Investigate."', omnisavant: '"Early deterioration — escalate to risk."' },
+      { vertical: 'Construction lending', generic: 'Cash flow spike in April — flag for review.', omnisavant: 'Q4 draw pattern before May closeout — seasonal. Monitor only. Acting causes overlending.' },
+      { vertical: 'SMB SaaS lending', generic: 'Revenue variance — flag for review.', omnisavant: 'Annual-to-monthly billing conversion underway. Expected dip. No credit action needed.' },
+      { vertical: 'Retail / consumer lending', generic: 'Payment behavior change — flag for review.', omnisavant: 'Early-cycle deterioration pattern matching 2022 cohort. Escalate to risk before next statement.' },
     ],
-    burry: 'Burry\'s edge: same data as everyone else, read differently. Same signal. Three verticals. Three right answers. Generic AI gives one wrong answer for all three.',
+    burry: 'Burry\'s edge was not access to better data — it was reading the same loan-level data differently than everyone else. Vertical specialization is the same bet: same signals, calibrated interpretation, right answer.',
   },
   {
     number: '6', icon: Shield, color: 'neon-pink',
@@ -149,34 +149,29 @@ const burryMisalignments = [
 
 const verticalElimination = [
   {
-    vertical: 'Generic SaaS Tool',
-    status: 'out',
-    appeal: 'Huge TAM, sell broadly',
-    kill: 'No vertical depth, no switching costs. Generic SaaS is collapsing. Per-seat licensing is a failing model. Incumbents always win the lowest common denominator.',
+    vertical: 'Generic SaaS',
+    appeal: 'Huge TAM — sell broadly across every industry',
+    reason: 'Generic SaaS is the one place Omnisavant should not be. Per-seat licensing is collapsing. No vertical depth means no switching costs. The platform players — Microsoft, Salesforce — always win at the lowest common denominator. This is also the founding team\'s closest prior experience, which makes it the most tempting and the most dangerous default.',
   },
   {
     vertical: 'EdTech',
-    status: 'out',
-    appeal: 'Large market, personalization',
-    kill: 'No money. 18-month procurement cycles. Outcomes (test scores) take years to manifest and are politically contested. FERPA compliance with no budget attached.',
+    appeal: 'Large market, strong personalization story',
+    reason: 'No budget. 18-month procurement cycles tied to academic calendars. Outcomes — test scores, retention — take years to manifest and are politically contested. FERPA compliance with zero CCO-level budget to attach it to. The team has no domain proximity here.',
   },
   {
     vertical: 'Healthcare',
-    status: 'later',
-    appeal: 'HIPAA gate, large deals',
-    kill: 'FDA regulates AI in clinical pathways as a medical device. Wrong decision = patient harm liability. Sales cycle: 18–24 months minimum. Wrong first move without domain experience.',
+    appeal: 'HIPAA gate creates high switching costs, large deal sizes',
+    reason: 'AI in clinical pathways is regulated by the FDA as a medical device. A wrong recommendation carries patient harm liability. Sales cycles run 18–24 months minimum. Without domain experience in clinical workflows or hospital procurement, the first customer is the wrong place to learn.',
   },
   {
     vertical: 'Legal',
-    status: 'out',
-    appeal: 'Harvey at $100M+ ARR',
-    kill: 'Harvey owns it. Won territory. 150%+ NRR, years of firm-specific training data. Market too narrow for two Harvey-scale companies.',
+    appeal: 'Harvey\'s trajectory proves the market',
+    reason: 'Harvey already owns this. 150%+ NRR, years of firm-specific training data, deep workflow embedding. The market is too narrow for two Harvey-scale companies, and the founding team has no legal domain experience to compete on interpretation quality.',
   },
   {
     vertical: 'Fintech',
-    status: 'in',
-    appeal: '91% startup-held, fragmented',
-    kill: 'Passes every test. Compliance is a P&L line item. Outcomes are in dollars. Domain proximity to B2B operators. Window is open.',
+    appeal: '91% startup-held market, $30B+ compliance spend, fragmented tooling',
+    reason: 'Every filter passes. Compliance budget is non-discretionary. Outcomes are in dollars — churn prevented, losses avoided, fines not incurred. The founding team\'s B2B SaaS and operator background is the closest domain match. The regulatory window is open and narrowing.',
   },
 ];
 
@@ -338,7 +333,7 @@ export default function MagicWand() {
                   )}
                   {moat.verticalTable && (
                     <>
-                      <p className="text-sm text-gray-500 mb-3">Same signal. Three verticals. Three right answers.</p>
+                      <p className="text-sm text-gray-500 mb-3">Same signal shape. Three verticals. Three completely different calls.</p>
                       <div className="space-y-2">
                         {moat.verticalTable.map((row, ri) => (
                           <div key={ri} className="bg-gray-50 rounded-lg p-3 border border-gray-100">
@@ -533,45 +528,35 @@ export default function MagicWand() {
       {/* ── Vertical Elimination ── */}
       <div className="glass-card p-8">
         <h3 className="text-2xl font-bold mb-2 flex items-center gap-2">
-          <XCircle className="text-red-500" size={24} />
-          Why Not Everywhere — The Vertical Elimination Case
+          <Target className="text-electric" size={24} />
+          Why Fintech — The Vertical Case
         </h3>
         <p className="text-gray-600 text-base mb-6">
-          The magic wand ends in fintech. Every other vertical has a structural reason it&apos;s the wrong first move. This isn&apos;t pessimism — it&apos;s the Burry filter: follow the incentives and the evidence, not the narrative.
+          The magic wand ends in fintech. Not because every other vertical is bad — because every other vertical is the wrong first move for this team, at this time, with this architecture.
         </p>
 
         <div className="overflow-x-auto mb-8">
           <table className="w-full text-base border-collapse">
             <thead>
               <tr className="bg-gray-100 border-b-2 border-gray-200">
-                <th className="px-5 py-4 text-left font-semibold text-gray-700 w-[20%]">Vertical</th>
-                <th className="px-5 py-4 text-left font-semibold text-gray-700 w-[10%]">Verdict</th>
-                <th className="px-5 py-4 text-left font-semibold text-gray-700 w-[22%]">Surface appeal</th>
-                <th className="px-5 py-4 text-left font-semibold text-gray-700">Structural reason it doesn&apos;t work (or why fintech is right)</th>
+                <th className="px-5 py-4 text-left font-semibold text-gray-700 w-[18%]">Vertical</th>
+                <th className="px-5 py-4 text-left font-semibold text-gray-700 w-[28%]">Surface appeal</th>
+                <th className="px-5 py-4 text-left font-semibold text-gray-700">Why fintech is the better opportunity</th>
               </tr>
             </thead>
             <tbody>
               {verticalElimination.map((v, i) => (
                 <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                  <td className="border border-gray-200 px-5 py-4 font-semibold text-gray-900">{v.vertical}</td>
-                  <td className="border border-gray-200 px-5 py-4">
-                    <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-bold ${
-                      v.status === 'in' ? 'bg-green-100 text-green-700' :
-                      v.status === 'later' ? 'bg-amber-100 text-amber-700' :
-                      'bg-red-100 text-red-700'
-                    }`}>
-                      {v.status === 'in' ? 'Selected' : v.status === 'later' ? 'Year 4–5' : 'Out'}
-                    </span>
-                  </td>
+                  <td className={`border border-gray-200 px-5 py-4 font-semibold ${v.vertical === 'Fintech' ? 'text-electric' : 'text-gray-900'}`}>{v.vertical}</td>
                   <td className="border border-gray-200 px-5 py-4 text-gray-500 text-sm">{v.appeal}</td>
-                  <td className={`border border-gray-200 px-5 py-4 text-sm leading-relaxed ${v.status === 'in' ? 'text-green-700 font-medium' : 'text-gray-700'}`}>{v.kill}</td>
+                  <td className={`border border-gray-200 px-5 py-4 text-sm leading-relaxed ${v.vertical === 'Fintech' ? 'text-green-700 font-medium bg-green-50/40' : 'text-gray-700'}`}>{v.reason}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
 
-        {/* Fintech fit chart + analogies */}
+        {/* Fintech fit chart */}
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
           <div>
             <p className="text-base font-semibold text-gray-700 mb-4">Why Fintech Scores on Every Dimension</p>
@@ -593,18 +578,90 @@ export default function MagicWand() {
             </ResponsiveContainer>
           </div>
           <div className="flex flex-col justify-center space-y-4">
-            <div className="border border-green-200 bg-green-50 rounded-xl p-5">
-              <p className="text-sm font-bold text-green-700 uppercase mb-2">The Glean parallel</p>
-              <p className="text-base text-gray-700 leading-relaxed">Glean didn&apos;t build generic enterprise search. It built for one specific problem, one buyer, then expanded. $7.2B — not from being broad, but from being the best at one compounding problem first.</p>
-            </div>
-            <div className="border border-electric/30 bg-electric/5 rounded-xl p-5">
-              <p className="text-sm font-bold text-electric uppercase mb-2">Sierra analog</p>
-              <p className="text-base text-gray-700 leading-relaxed">Sierra knew its audience: customer support. One outcome: resolution rate. Built around it, priced against it. Omnisavant does the same — B2B fintech operators, one outcome, priced against that outcome at month 18.</p>
-            </div>
             <div className="border-l-4 border-electric pl-5 py-2">
-              <p className="text-base font-bold text-gray-900">The Burry formula: find what everyone&apos;s ignoring. Follow incentives to their conclusion. Build what survives the correction.</p>
+              <p className="text-base font-bold text-gray-900 mb-1">The team fit</p>
+              <p className="text-sm text-gray-600 leading-relaxed">No legal or healthcare domain experience. EdTech is a stretch. Generic SaaS is the comfort zone — and the trap. B2B fintech operators are the closest customer profile to what the team already knows: fast-moving, outcome-obsessed, deeply wary of tools that can't show ROI in a quarter.</p>
+            </div>
+            <div className="border-l-4 border-neon-pink pl-5 py-2">
+              <p className="text-base font-bold text-gray-900 mb-1">The Burry formula</p>
+              <p className="text-sm text-gray-600 leading-relaxed">Find what everyone's ignoring. Follow incentives to their conclusion. Build what survives the correction. In fintech right now: compliance infrastructure is what everyone skipped, the regulatory correction is underway, and nobody has built the intelligence layer on top of it.</p>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* ── What the Ideal Solution Looks Like ── */}
+      <div className="glass-card p-8">
+        <h3 className="text-2xl font-bold mb-2 flex items-center gap-2">
+          <CheckCircle className="text-neon-purple" size={24} />
+          The Ideal Fintech Intelligence Product — One View
+        </h3>
+        <p className="text-gray-600 text-base mb-8">
+          Not a roadmap. Not a feature list. The shape of a product that would win this market — if it were built right from day one.
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 mb-8">
+          {[
+            {
+              label: 'Surfaces before you ask',
+              detail: 'Not a search box. Not a dashboard to check. A system that pushes the three things leadership doesn\'t know they need to know — into the meeting, into the Slack thread, before the decision is made.',
+              color: 'border-electric/30 bg-electric/5',
+              accent: 'text-electric',
+            },
+            {
+              label: 'Compliance is the product',
+              detail: 'Every signal has a source. Every AI recommendation has a reasoning chain. Every action has an audit trail. The CCO can answer any regulator question — 18 months back — in under an hour.',
+              color: 'border-neon-pink/30 bg-neon-pink/5',
+              accent: 'text-neon-pink',
+            },
+            {
+              label: 'Vertical-calibrated interpretation',
+              detail: 'Construction draw patterns, SaaS billing cycles, consumer early-cycle deterioration — the model knows the difference because it was trained on this vertical\'s decisions, not generic data.',
+              color: 'border-neon-purple/30 bg-neon-purple/5',
+              accent: 'text-neon-purple',
+            },
+            {
+              label: 'Priced against outcomes',
+              detail: 'Not per seat. Tied to accounts retained, losses avoided, decisions made faster. At month 18, the data exists to prove it. The pricing model shifts from SaaS cost line to ROI multiplier.',
+              color: 'border-cyber-teal/30 bg-cyber-teal/5',
+              accent: 'text-cyber-teal',
+            },
+            {
+              label: 'Gets harder to remove over time',
+              detail: 'After 24 months it holds the org\'s complete signal-to-decision history. It knows what worked and what didn\'t. Removing it means starting that accumulation from zero. No one does that voluntarily.',
+              color: 'border-electric/30 bg-electric/5',
+              accent: 'text-electric',
+            },
+            {
+              label: 'Scales cross-team, not per-user',
+              detail: 'Value compounds as more teams connect. Risk surfaces a flag → CS sees it → Sales goes into the renewal call informed. The network effect is internal. That\'s rare in B2B SaaS. Build it deliberately.',
+              color: 'border-neon-pink/30 bg-neon-pink/5',
+              accent: 'text-neon-pink',
+            },
+          ].map((card, i) => (
+            <div key={i} className={`border rounded-xl p-5 ${card.color}`}>
+              <p className={`text-sm font-bold uppercase tracking-wide mb-2 ${card.accent}`}>{card.label}</p>
+              <p className="text-sm text-gray-700 leading-relaxed">{card.detail}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+          <div className="border border-green-200 bg-green-50 rounded-xl p-5">
+            <p className="text-sm font-bold text-green-700 uppercase mb-2">The Glean parallel</p>
+            <p className="text-sm text-gray-700 leading-relaxed">Glean didn't build generic enterprise search. It built for one specific problem — enterprise knowledge retrieval — then expanded. $7.2B, not from being broad, but from being the best at one compounding problem first.</p>
+          </div>
+          <div className="border border-electric/30 bg-electric/5 rounded-xl p-5">
+            <p className="text-sm font-bold text-electric uppercase mb-2">The Sierra pricing model</p>
+            <p className="text-sm text-gray-700 leading-relaxed">Sierra knew its audience and its outcome: customer support resolution rate. Built around it, priced against it — $100M ARR in 21 months. Omnisavant in fintech does the same: one buyer, one outcome, priced against that outcome at month 18.</p>
+          </div>
+        </div>
+
+        <div className="bg-gray-900 text-white rounded-xl px-7 py-6">
+          <p className="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-3">The one-sentence version</p>
+          <p className="text-base text-gray-200 leading-relaxed">
+            An intelligence layer that B2B fintech operators cannot turn off — because it holds their compliance history, surfaces decisions before they're made poorly, and gets more accurate every quarter as it learns what this specific org considers signal.
+          </p>
         </div>
       </div>
 
