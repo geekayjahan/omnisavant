@@ -235,7 +235,7 @@ const moats = [
     id: 1,
     name: 'Organizational Memory',
     subtitle: 'Decision traces, not documents',
-    current: 'Architecture supports it. PRFAQ describes it as "memory when people leave" — the secondary value. The primary value is the irreplaceable record of what signals this org noticed, acted on, and what followed.',
+    current: 'Architecture supports it. The PRFAQ frames this as "memory when people leave" — that\'s the secondary value. The primary value is the irreplaceable record of what signals the org acted on and what followed.',
     verdict: 'Strongest moat, most underspecified. Close this gap first.',
     status: 'underbuilt',
     phase: 'Now',
@@ -244,7 +244,7 @@ const moats = [
     id: 2,
     name: 'Signal-to-Action Loop',
     subtitle: '10 seconds of friction, years of compounding signal',
-    current: 'Mentioned in PRFAQ as one of four factors. No product mechanism described. The feedback tap — "acted / knew / irrelevant" — embedded in every Slack signal is the highest-ROI build in the design partner phase.',
+    current: 'No product mechanism described yet. A simple feedback tap — "acted / knew / irrelevant" — embedded in every Slack signal is the highest-ROI build in the design partner phase.',
     verdict: 'Architecturally sound, operationally unbuilt. Prioritize it now.',
     status: 'unbuilt',
     phase: 'Now',
@@ -262,7 +262,7 @@ const moats = [
     id: 4,
     name: 'Workflow Embedding',
     subtitle: 'Push not pull — infrastructure you cannot turn off',
-    current: 'PRFAQ frames Slack digests as delivery, not as strategic lock-in. The Cursor analogy applies: once an analyst relies on signals appearing in their existing channels, going back feels like deliberate blindness.',
+    current: 'Slack digests are framed as a delivery feature, not strategic lock-in. Once an analyst depends on signals surfacing in their existing channels, removal feels like deliberate blindness — that\'s the design principle to build toward.',
     verdict: 'Design principle gap. Reframe from feature to identity.',
     status: 'strategic',
     phase: 'Months 6–18',
@@ -414,23 +414,15 @@ export default function StrategicPositioning() {
             <p className="text-sm text-gray-600">Less than 1% of enterprise unstructured data is AI-ready (IDC, 2026). Enterprises will not clean their data before buying intelligence. The tool that works on data as it exists — not as you wish it existed — wins by default.</p>
           </div>
         </div>
-        <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="rounded-xl border border-gray-200 bg-gray-50 p-5">
-            <p className="text-sm text-gray-600">
-              <span className="font-semibold text-gray-800">The agentic wave adds urgency:</span>{' '}
-              Gartner predicts 15% of day-to-day work decisions will be made autonomously by 2028. The "recommended actions" layer is exactly where this is heading — but it must be built as agent-ready infrastructure from day one, or the platforms absorb it.
-            </p>
+        <div className="mt-4 rounded-xl border border-violet-200 bg-violet-50 p-5">
+          <div className="flex items-center gap-2 mb-2">
+            <Zap className="w-4 h-4 text-violet-600" />
+            <span className="text-xs font-semibold text-violet-700 uppercase tracking-wide">The New Baseline</span>
           </div>
-          <div className="rounded-xl border border-violet-200 bg-violet-50 p-5">
-            <div className="flex items-center gap-2 mb-2">
-              <Zap className="w-4 h-4 text-violet-600" />
-              <span className="text-xs font-semibold text-violet-700 uppercase tracking-wide">The New Baseline</span>
-            </div>
-            <p className="text-sm text-gray-700">
-              <span className="font-semibold">Claude-class models are the commodity now.</span>{' '}
-              Any enterprise can access frontier AI. That is no longer the differentiator. What enterprises cannot access off the shelf: a model calibrated to their org, a compliance layer their legal team trusts, and a system that took years to embed into their workflows. Omnisavant's bet is that the hard part is not the AI — it is earning the right to sit inside the enterprise.
-            </p>
-          </div>
+          <p className="text-sm text-gray-700">
+            <span className="font-semibold">Claude-class models are the commodity now.</span>{' '}
+            Any enterprise can call frontier AI APIs today. The differentiator is no longer the model — it is the compliance layer, the org-specific calibration, and the embedded workflows that take years to build and make Omnisavant structurally impossible to replace.
+          </p>
         </div>
       </section>
 
@@ -438,7 +430,7 @@ export default function StrategicPositioning() {
       <section>
         <SectionLabel number="02" title="The Archetype Gap — Where Omnisavant Is vs. Where It Needs to Be" />
         <p className="text-gray-600 text-sm leading-relaxed mb-6">
-          Every AI application company that survives 2027 will have staked an unambiguous claim in one of three archetypes. Omnisavant is currently straddling two — and it has the architecture to claim the right one.
+          Every AI company that survives 2027 will have staked an unambiguous claim in one of three archetypes. Omnisavant is straddling two — and has the architecture to claim the right one.
         </p>
         <div className="space-y-3">
           {archetypes.map((a) => (
@@ -473,7 +465,7 @@ export default function StrategicPositioning() {
       <section>
         <SectionLabel number="03" title="Competitive Benchmarking" />
         <p className="text-gray-600 text-sm leading-relaxed mb-6">
-          Five companies that define the terms of competition — what Omnisavant wins, loses, and must learn from each.
+          Five companies that define the terms of competition.
         </p>
         <div className="rounded-xl border border-gray-200 overflow-hidden">
           <table className="w-full text-sm">
@@ -666,12 +658,11 @@ export default function StrategicPositioning() {
           </div>
           <div className="border-t border-gray-700 pt-6 space-y-4">
             <p className="text-sm text-gray-300 leading-relaxed">
-              Both are buildable from the current architecture. The winners in AI don't win on AI — Harvey won on workflow depth, Abridge on human calibration, Sierra on pricing alignment, Cursor on muscle memory. Omnisavant is at the moment where that choice gets made. It is usually made not in a strategy session but through a thousand small product decisions: whether to build the Salesforce connector or get authorization via MCP; whether to launch a dashboard or surface signals in Slack; whether to price per seat or tie revenue to accounts saved.
+              The winners in AI don't win on AI — Harvey won on workflow depth, Sierra on pricing alignment, Cursor on muscle memory. This choice is rarely made in a strategy session. It's made through small product decisions: Salesforce connector or MCP authorization; dashboard or Slack signal; per-seat pricing or revenue tied to accounts saved.
             </p>
             <div className="rounded-lg border border-violet-700 bg-gray-800 p-4">
-              <p className="text-xs font-semibold text-violet-400 uppercase tracking-widest mb-2">What this means in practice</p>
               <p className="text-sm text-gray-300 leading-relaxed">
-                Claude, Gemini, GPT — enterprises can call these APIs today. The model is no longer the product. The product is the enterprise-native layer that sits on top: compliance baked into the architecture from day zero, not bolted on at month eighteen; an onboarding motion that targets CCOs and GMs, not VP Product; a system designed so that after twenty-four months, ripping it out means an enterprise loses its institutional memory, its audit trail, and two years of calibrated signal history. <span className="text-white font-semibold">That is what takes years to replicate. That is the moat. And it has to be built from the first line of code — not when the sales team asks for it.</span>
+                The model is no longer the product. <span className="text-white font-semibold">The product is the enterprise-native layer built on top of it</span> — compliance from day zero, targeting CCOs not VP Product, and a system so embedded that after two years, removing it means losing institutional memory, audit trails, and calibrated signal history no vendor can restore. <span className="text-white font-semibold">That moat has to be built from the first line of code.</span>
               </p>
             </div>
           </div>
